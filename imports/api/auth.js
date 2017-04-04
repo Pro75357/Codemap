@@ -4,6 +4,8 @@
 import { myApiKey } from '../../apikey.js'; // this should just give the variable "myApiKey", of which the API key is stored as a string.  
 var thisApiKey = myApiKey();
 
+//import './results.js'
+
 var authroot = 'https://utslogin.nlm.nih.gov'; // Root URL of the auth api
 var restroot = 'https://uts-ws.nlm.nih.gov/rest'; // root URL of the REST api -- https://documentation.uts.nlm.nih.gov/rest/home.html
 // Query params: https://documentation.uts.nlm.nih.gov/rest/search/index.html#query-parameters
@@ -80,7 +82,7 @@ var TGT = 'asdf' // invalid init value for TGT
 			getTicket: function(){
 				this.unblock; // no idea
 				console.log('getting new single ticket')
-				console.log('Using TGT: '+TGT);
+				//console.log('Using TGT: '+TGT);
 				try{
 					this.call = HTTP.call("POST", TGT, {params: {service: 'http://umlsks.nlm.nih.gov'}});
 					var ticket = this.call.content;
@@ -97,8 +99,8 @@ var TGT = 'asdf' // invalid init value for TGT
 				console.log('Searching: '+searchText);
 				try{
 					this.call = HTTP.call("GET", restroot+'/search/current', {params: {ticket: Meteor.call('getTicket'), string: searchText}});
-					console.log(this.call);
-					return this.call;
+					//console.log(this.call.data);
+					return this.call.data;
 				} catch(e) {
 					console.log(e);
 					return false;

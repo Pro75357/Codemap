@@ -8,8 +8,16 @@
 	{{#if currentUser}}
 	<div class="container">
 		{{> searchBox}}
-
 	</div>
+	Results: {{resultsCount}}
+	{{# if resultsPresent}}
+	<hr/>
+	<div class="container">
+	<h4>Results:</h4>
+	{{> resultsdisplay}}
+	
+	</div>
+	{{/if}}
 	{{/if}}
 </body>
 
@@ -18,19 +26,28 @@
 <template name='searchBox'>
 <div class="container">
   <h2>Enter search term</h2>
-  <form>
+  <form class='form-inline'>
+  <label class="mr-sm-2" for="inlineFormCustomSelect">Source Codes</label>
+  <select id="inlineFormCustomSelect">
+    <option selected>Choose...</option>
+    <option value="1">ClarityHX</option>
+    <option value="2">Clarity EDG (Dx)</option>
+    <option value="3">Three</option>
+  </select>
+
     <div class="form-group">
-      <input type="text" name ="text" class="form-control" placeholder="Enter search term here">
+      <input type="search" name ="text" class="form-control" placeholder="Enter search term here">
     </div>
+    <button type="submit" class="btn btn-default">Submit</button>
     <div class="checkbox">
       <label><input type="checkbox"> Exact match only</label>
     </div>
-    <button type="submit" class="btn btn-default">Submit</button>
   </form>
 </div>
 </template>
 
-<template name='results'>
-<div class="container">
-
-</div>
+<template name='resultsdisplay'>
+	{{#each results}}
+	<li>{{results}}</li>
+	{{/each}}
+</template>
