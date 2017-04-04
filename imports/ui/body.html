@@ -1,0 +1,36 @@
+<body>
+	<div class="jumbotron text-center">
+		<h1>Codemap UI</h1>
+		<div class="col-sm-8">
+			<p>User: {{> loginButtons}}</p>
+		</div>
+	</div>
+	{{#if currentUser}}
+	<div class="container">
+		{{> searchBox}}
+
+	</div>
+	{{/if}}
+</body>
+
+<!-- HERE BE TEMPLATES -->
+
+<template name='searchBox'>
+<div class="container">
+  <h2>Enter search term</h2>
+  <form>
+    <div class="form-group">
+      <input type="text" name ="text" class="form-control" placeholder="Enter search term here">
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox"> Exact match only</label>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+</div>
+</template>
+
+<template name='results'>
+<div class="container">
+
+</div>
