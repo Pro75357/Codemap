@@ -98,21 +98,19 @@ var TGT = 'asdf' // invalid init value for TGT
 			
 			searchApi: function(searchText){
 				this.unblock;
-				console.log('Searching: '+searchText);
 				try{
-					this.call = HTTP.call(
+					HTTP.call(
 						"GET", 
 						restroot+'/search/current', 
 						{params: {ticket: Meteor.call('getTicket'), 
 						string: searchText}},
 						function (err, res) {
-							console.log('Callback')
-							console.log(JSON.parse(res.content))
+							//Remove the only result
 							Meteor.call('results.remove')
+
+							//Put in a new result
 							Meteor.call('results.insert', JSON.parse(res.content))
 						});
-					//console.log(this.call.data);
-					return this.call.data;
 				} catch(e) {
 					console.log(e);
 					return false;
