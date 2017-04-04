@@ -6,18 +6,24 @@
 		</div>
 	</div>
 	{{#if currentUser}}
-	<div class="container">
-		{{> searchBox}}
-	</div>
-	Results: {{resultsCount}}
-	{{# if resultsPresent}}
-	<hr/>
-	<div class="container">
-	<h4>Results:</h4>
-	{{> resultsdisplay}}
-	
-	</div>
-	{{/if}}
+		<div class="container">
+			{{> searchBox}}
+		</div>
+		Results: {{resultsCount}}
+		{{# if resultsPresent}}
+			<hr/>
+			<div class="container">
+				<h4>Results:</h4>
+					<ul>
+					{{#each results.data}}
+						<li>{{ui}}</li>
+						<li>{{rootSource}}</li>
+						<li>{{name}}</li>
+						<li>{{uri}}</li>
+					{{/each}}
+					</ul>
+			</div>
+		{{/if}}
 	{{/if}}
 </body>
 
@@ -47,7 +53,16 @@
 </template>
 
 <template name='resultsdisplay'>
-	{{#each results}}
-	<li>{{results}}</li>
-	{{/each}}
+	<ul>
+		{{#each results}}
+			<li>
+				{{#each data}}
+					{{ui}}
+					{{rootSource}}
+					{{name}}
+					{{uri}}
+				{{/each}}
+			</li>
+		{{/each}}
+	</ul>
 </template>

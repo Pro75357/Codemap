@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating'
 import './body.html'
 import '../api/auth.js'
-import '../api/results.js'
+import { Results } from '../api/results.js'
 
 //Listener for form .PressureInput
 Template.searchBox.events({
@@ -23,17 +23,17 @@ Template.searchBox.events({
 
 Template.body.helpers({
 	results() {
-		return Meteor.call('results.find');
+		//return Meteor.call('results.find');
+		return Results.findOne()
 	},
 	resultsCount() {
-		console.log(Meteor.call('results.count'));
-		return Meteor.call('results.count');
+		return Results.find().count()
 	},
 	resultsPresent() {
-		if (Meteor.call('results.count') >0){
+		if (Results.find().count() > 0){
 			return true;
 		} else {
 			return false;
 		};
 	}
-});
+})

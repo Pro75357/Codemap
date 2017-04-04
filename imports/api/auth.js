@@ -2,6 +2,8 @@
 
 
 import { myApiKey } from '../../apikey.js'; // this should just give the variable "myApiKey", of which the API key is stored as a string.  
+import { Results } from './results.js'
+
 var thisApiKey = myApiKey();
 
 //import './results.js'
@@ -98,7 +100,17 @@ var TGT = 'asdf' // invalid init value for TGT
 				this.unblock;
 				console.log('Searching: '+searchText);
 				try{
-					this.call = HTTP.call("GET", restroot+'/search/current', {params: {ticket: Meteor.call('getTicket'), string: searchText}});
+					this.call = HTTP.call(
+						"GET", 
+						restroot+'/search/current', 
+						{params: {ticket: Meteor.call('getTicket'), 
+						string: searchText}},
+						function (err, res) {
+							console.log('Callback')
+							console.log(JSON.parse(res.content))
+							Meteor.call('results.remove')
+							Meteor.call('results.insert', JSON.parse(res.content))
+						});
 					//console.log(this.call.data);
 					return this.call.data;
 				} catch(e) {

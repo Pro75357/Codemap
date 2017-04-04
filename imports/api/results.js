@@ -12,12 +12,12 @@ if (Meteor.isServer) {
 	})
 
 	Meteor.methods({
-		'results.insert'({ result }) {
-			console.log("inserting results")
-			Results.insert(result);
+		'results.insert'(result) {
+			console.log(result.results)
+			Results.insert({ data : result.result.results });
 		},
 		'results.remove'(pressureId){
-			Results.remove(pressureId);
+			Results.remove({});
 		},
 		'results.count'(){
 			//console.log(Results.find({}).count());
