@@ -3,7 +3,7 @@
 
 import { myApiKey } from '../../apikey.js'; // this should just give the variable "myApiKey", of which the API key is stored as a string.  
 import { Results } from './results.js'
-
+import { Codes } from './codes.js'
 var thisApiKey = myApiKey();
 
 //import './results.js'
@@ -99,27 +99,55 @@ var TGT = 'asdf' // invalid init value for TGT
 			searchApi: function(searchText){
 				this.unblock;
 				try{
-					HTTP.call(
-						"GET", 
-						restroot+'/search/current', 
-						{params: {ticket: Meteor.call('getTicket'), 
-						string: searchText}},
-						function (err, res) {
-							//Remove the only result
-							Meteor.call('results.remove')
-
-							//Put in a new result
-							Meteor.call('results.insert', JSON.parse(res.content))
-						});
+					var call = HTTP.call(
+							"GET", 
+							restroot+'/search/current', 
+							{params: {ticket: Meteor.call('getTicket'), 
+										string: searchText,
+										sabs: 'SNOMEDCT_US',  //SNOMED_CT codes only
+										searchType: 'words' //default is 'words'
+										}
+							}
+							
+							//function (err, res) {
+								//Remove the only result
+								//Meteor.call('results.remove')
+	
+								//Put in a new result
+							//	console.log('result objects: '+res.data.result.results[0])
+								//console.log('CUI: '+res.data.result.results[0].ui)
+							//	return res.data.result.results[0]  //Returns first result object
+							//	}
+							)
+						return call.data.result.results // returns result object
 				} catch(e) {
 					console.log(e);
 					return false;
 				}
-			}	
-
-		
-		});
-		
+			},
+			
+			updateCUI: function(){
+				var code = Codes.find({},{limit: 10}).fetch()
+				for (x in code) {
+					//console.log(code[x].Clarity_HX_Description)
+					var result = Meteor.call('searchApi', code[x].Clarity_HX_Description)
+					console.log(result)
+					//console.log('CUI in updatefx: '+result.ui)
+					//console.log(code[x]._id)
+					Codes.update({
+						_id: code[x]._id
+						},{
+							$set: {CUI: result[0].ui } //returns CUI of first result.
+					})
+					Codes.update({
+						_id: code[x]._id
+					},{
+						$set: {name: result[0].name} // returns name of first result
+					})
+				}
+			}
+			
+		})
 		Meteor.call('getTGT');
 		//Meteor.call('ticketTest');
 		console.log('Ready to Search!')

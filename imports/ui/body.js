@@ -22,6 +22,16 @@ Template.searchBox.events({
   },
 });
 
+Template.mega.events({
+	'submit form'(event) {
+	    event.preventDefault()
+	   // console.log("mega pressed")
+		//console.log(Codes.find({},{limit: 10} ).fetch())
+	    //console.log(Codes.find({},{limit: 10, fields: {'Clairty_HX_Description':1}} ).fetch())
+	    Meteor.call('updateCUI')
+	}
+})
+
 Template.body.helpers({
 		resultsCount() {
 		return Results.find().count()
@@ -44,7 +54,7 @@ Template.resultsdisplay.helpers({
 
 Template.bigtable.helpers({	
 	codes(){
-		console.log(Codes.find({}).fetch())
-		return Codes.find({})
+		//console.log(Codes.find({}).fetch())
+		return Codes.find({}, {sort: { Clarity_HX_Codes: 1 }, limit: 10 })
 	}
 })

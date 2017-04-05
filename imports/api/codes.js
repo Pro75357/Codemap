@@ -8,6 +8,6 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
 	Meteor.publish('codes', function codesPublication() {
-		return Codes.find();
+		return Codes.find({}, {limit: 10})
 	})
 }

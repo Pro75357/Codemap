@@ -2,871 +2,871 @@
   {
     "Clarity_HX_Code": "HX0001",
     "Clarity_HX_Description": "HERNIA REPAIR",
-    "SNOMEDCT_Code": 50465008,
-    "SNOMEDCT_Description": "Hernia repair (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0002",
     "Clarity_HX_Description": "BLADDER SURGERY",
-    "SNOMEDCT_Code": 118855008,
-    "SNOMEDCT_Description": "Procedure on bladder (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0003",
     "Clarity_HX_Description": "CARDIAC VALVE REPLACEMENT",
-    "SNOMEDCT_Code": 428893001,
-    "SNOMEDCT_Description": "Replacement of valved cardiac conduit"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0004",
     "Clarity_HX_Description": "JOINT REPLACEMENT",
-    "SNOMEDCT_Code": 179537001,
-    "SNOMEDCT_Description": "Excision arthroplasty"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0005",
     "Clarity_HX_Description": "COMBINED HYSTERECTOMY ABDOMINAL W/A&P REPAIR/OOPHORECTOY",
-    "SNOMEDCT_Code": 116144002,
-    "SNOMEDCT_Description": "Total abdominal hysterectomy with bilateral salpingo-oophorectomy (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0006",
     "Clarity_HX_Description": "COMBINED HYSTERECTOMY VAGINAL/OOPHORECTOMY/A&P REPAIR/SACROSPINOUS LIG",
-    "SNOMEDCT_Code": 86477000,
-    "SNOMEDCT_Description": "Total hysterectomy with removal of both tubes and ovaries (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0007",
     "Clarity_HX_Description": "APPENDECTOMY",
-    "SNOMEDCT_Code": 80146002,
-    "SNOMEDCT_Description": "Appendectomy (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0008",
     "Clarity_HX_Description": "BRAIN AVM REPAIR",
-    "SNOMEDCT_Code": 230910009,
-    "SNOMEDCT_Description": "Embolisation of intracranial arteriovenous malformation"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0009",
     "Clarity_HX_Description": "BRAIN HEMATOMA EVACUTATION",
-    "SNOMEDCT_Code": 446848007,
-    "SNOMEDCT_Description": "Craniotomy and evacuation of blood clot (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0010",
     "Clarity_HX_Description": "BRAIN HEMISPHERECTOMY, PARTIAL",
-    "SNOMEDCT_Code": 67402009,
-    "SNOMEDCT_Description": "Partial lobectomy of brain (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0011",
     "Clarity_HX_Description": "BRAIN HEMISPHERECTOMY, TOTAL",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0012",
     "Clarity_HX_Description": "BRAIN MENINGIOMA EXCISION",
-    "SNOMEDCT_Code": 230810008,
-    "SNOMEDCT_Description": "Excision of tumor of brain meninges (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0013",
     "Clarity_HX_Description": "BRAIN SURGERY",
-    "SNOMEDCT_Code": 70586009,
-    "SNOMEDCT_Description": "Brain operations"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0014",
     "Clarity_HX_Description": "BRAIN TUMOR EXCISION",
-    "SNOMEDCT_Code": 230837005,
-    "SNOMEDCT_Description": "Focal excision of brain tissue tumor (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0015",
     "Clarity_HX_Description": "BREAST BIOPSY",
-    "SNOMEDCT_Code": 122548005,
-    "SNOMEDCT_Description": "Biopsy of breast (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0016",
     "Clarity_HX_Description": "BREAST CYST ASPIRATION",
-    "SNOMEDCT_Code": 287572003,
-    "SNOMEDCT_Description": "Diagnostic aspiration of breast cyst"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0017",
     "Clarity_HX_Description": "BREAST CYST EXCISION",
-    "SNOMEDCT_Code": 41180005,
-    "SNOMEDCT_Description": "Excision of cyst of breast"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0018",
     "Clarity_HX_Description": "BREAST ENHANCEMENT SURGERY",
-    "SNOMEDCT_Code": 22890008,
-    "SNOMEDCT_Description": "Augmentation mammoplasty (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0019",
     "Clarity_HX_Description": "BREAST FIBROADENOMA SURGERY",
-    "SNOMEDCT_Code": 69990006,
-    "SNOMEDCT_Description": "Excision of fibroadenoma of breast"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0020",
     "Clarity_HX_Description": "BREAST LUMPECTOMY",
-    "SNOMEDCT_Code": 392021009,
-    "SNOMEDCT_Description": "Lumpectomy of breast (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0021",
     "Clarity_HX_Description": "BREAST RECONSTRUCTION",
-    "SNOMEDCT_Code": 33496007,
-    "SNOMEDCT_Description": "Reconstruction of breast (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0022",
     "Clarity_HX_Description": "BREAST REDUCTION SURGERY",
-    "SNOMEDCT_Code": 59214008,
-    "SNOMEDCT_Description": "Reduction mammoplasty (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0023",
     "Clarity_HX_Description": "BREAST SURGERY",
-    "SNOMEDCT_Code": 392090004,
-    "SNOMEDCT_Description": "Breast operation"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0024",
     "Clarity_HX_Description": "CEREBRAL ANEURYSM REPAIR",
-    "SNOMEDCT_Code": 265500000,
-    "SNOMEDCT_Description": "Operations on aneurysm of cerebral artery or circle of Willis (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0025",
     "Clarity_HX_Description": "CESAREAN SECTION",
-    "SNOMEDCT_Code": 11466000,
-    "SNOMEDCT_Description": "Cesarean section (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0026",
     "Clarity_HX_Description": "CESAREAN SECTION, CLASSIC",
-    "SNOMEDCT_Code": 84195007,
-    "SNOMEDCT_Description": "Classical cesarean section (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0027",
     "Clarity_HX_Description": "CESAREAN SECTION, LOW TRANSVERSE",
-    "SNOMEDCT_Code": 398307005,
-    "SNOMEDCT_Description": "Low cervical cesarean section (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0028",
     "Clarity_HX_Description": "CHOLECYSTECTOMY OPEN",
-    "SNOMEDCT_Code": 38102005,
-    "SNOMEDCT_Description": "Cholecystectomy (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0029",
     "Clarity_HX_Description": "CHOLECYSTECTOMY, LAPAROSCOPIC",
-    "SNOMEDCT_Code": 45595009,
-    "SNOMEDCT_Description": "Laparoscopic cholecystectomy (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0030",
     "Clarity_HX_Description": "COLECTOMY",
-    "SNOMEDCT_Code": 427816007,
-    "SNOMEDCT_Description": "History of colectomy (situation)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0031",
     "Clarity_HX_Description": "COLON SURGERY",
-    "SNOMEDCT_Code": 82874003,
-    "SNOMEDCT_Description": "Operation on colon (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0032",
     "Clarity_HX_Description": "CORONARY ARTERY BYPASS GRAFT",
-    "SNOMEDCT_Code": 232717009,
-    "SNOMEDCT_Description": "Coronary artery bypass grafting (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0033",
     "Clarity_HX_Description": "COSMETIC SURGERY",
-    "SNOMEDCT_Code": 56306000,
-    "SNOMEDCT_Description": "Cosmetic surgery (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0034",
     "Clarity_HX_Description": "ENUCLEATION",
-    "SNOMEDCT_Code": 172132001,
-    "SNOMEDCT_Description": "Enucleation of eyeball (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0035",
     "Clarity_HX_Description": "EYE MUSCLE SURGERY",
-    "SNOMEDCT_Code": 17639001,
-    "SNOMEDCT_Description": "Eye muscle operation"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0036",
     "Clarity_HX_Description": "EYE SURGERY",
-    "SNOMEDCT_Code": 373353005,
-    "SNOMEDCT_Description": "Eye operation"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0037",
     "Clarity_HX_Description": "EYELID CLOSURE",
-    "SNOMEDCT_Code": 120105003,
-    "SNOMEDCT_Description": "Eyelid closure"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0038",
     "Clarity_HX_Description": "FRACTURE SURGERY",
-    "SNOMEDCT_Code": 239278008,
-    "SNOMEDCT_Description": "Operation on fracture (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0039",
     "Clarity_HX_Description": "HYSTERECTOMY",
-    "SNOMEDCT_Code": 265056007,
-    "SNOMEDCT_Description": "Vaginal hysterectomy (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0040",
     "Clarity_HX_Description": "INGUINAL HERNIA REPAIR",
-    "SNOMEDCT_Code": 44558001,
-    "SNOMEDCT_Description": "Repair of inguinal hernia (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0041",
     "Clarity_HX_Description": "INTESTINAL MALROTATION REPAIR",
-    "SNOMEDCT_Code": 235296009,
-    "SNOMEDCT_Description": "Correction of malrotation of intestine"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0042",
     "Clarity_HX_Description": "PROSTATE SURGERY",
-    "SNOMEDCT_Code": 741007,
-    "SNOMEDCT_Description": "Operation on prostate (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0043",
     "Clarity_HX_Description": "PROSTATECTOMY",
-    "SNOMEDCT_Code": 90470006,
-    "SNOMEDCT_Description": "Prostatectomy (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0044",
     "Clarity_HX_Description": "SMALL INTESTINE SURGERY",
-    "SNOMEDCT_Code": 107936001,
-    "SNOMEDCT_Description": "Operative procedure on small intestine (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0045",
     "Clarity_HX_Description": "SMALL INTESTINE TRANSPLANT",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0046",
     "Clarity_HX_Description": "SPINAL CORD DECOMPRESSION",
-    "SNOMEDCT_Code": 10836008,
-    "SNOMEDCT_Description": "Decompression of spinal cord"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0047",
     "Clarity_HX_Description": "SPINAL FIXATION REMOVAL",
-    "SNOMEDCT_Code": 179229008,
-    "SNOMEDCT_Description": "Removal of spinal fixation system"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0048",
     "Clarity_HX_Description": "SPINAL FIXATION SURGERY W/ IMPLANT",
-    "SNOMEDCT_Code": 311479006,
-    "SNOMEDCT_Description": "Instrumentation of spine"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0049",
     "Clarity_HX_Description": "SPINAL FUSION",
-    "SNOMEDCT_Code": 55705006,
-    "SNOMEDCT_Description": "Spinal arthrodesis (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0050",
     "Clarity_HX_Description": "SPINE SURGERY",
-    "SNOMEDCT_Code": 392236004,
-    "SNOMEDCT_Description": "Operative procedure on spinal structure (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0051",
     "Clarity_HX_Description": "TOTAL ABDOMINAL HYSTERECTOMY",
-    "SNOMEDCT_Code": 116143008,
-    "SNOMEDCT_Description": "Total abdominal hysterectomy (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0052",
     "Clarity_HX_Description": "TUBAL LIGATION",
-    "SNOMEDCT_Code": 287664005,
-    "SNOMEDCT_Description": "Bilateral tubal ligation (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0053",
     "Clarity_HX_Description": "VAGINAL HYSTERECTOMY",
-    "SNOMEDCT_Code": 265056007,
-    "SNOMEDCT_Description": "Vaginal hysterectomy (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0054",
     "Clarity_HX_Description": "VASECTOMY",
-    "SNOMEDCT_Code": 22523008,
-    "SNOMEDCT_Description": "Vasectomy (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0055",
     "Clarity_HX_Description": "VASECTOMY REVERSAL",
-    "SNOMEDCT_Code": 176490000,
-    "SNOMEDCT_Description": "Reversal of vasectomy"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0056",
     "Clarity_HX_Description": "XR BONE SURVEY COMPLETE",
-    "SNOMEDCT_Code": 228084000,
-    "SNOMEDCT_Description": "Whole body bone imaging"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0057",
     "Clarity_HX_Description": "BACK SURGERY",
-    "SNOMEDCT_Code": 392236004,
-    "SNOMEDCT_Description": "Operative procedure on spinal structure (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0058",
     "Clarity_HX_Description": "CATARACT REMOVAL",
-    "SNOMEDCT_Code": 385468004,
-    "SNOMEDCT_Description": "Cataract extraction and insertion of intraocular lens (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0059",
     "Clarity_HX_Description": "CERVICAL BIOPSY",
-    "SNOMEDCT_Code": 50796003,
-    "SNOMEDCT_Description": "Biopsy of cervix"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0060",
     "Clarity_HX_Description": "COLONOSCOPY",
-    "SNOMEDCT_Code": 73761001,
-    "SNOMEDCT_Description": "Colonoscopy (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0060",
     "Clarity_HX_Description": "COLONOSCOPY",
-    "SNOMEDCT_Code": 73761001,
-    "SNOMEDCT_Description": "Colonoscopy (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0061",
     "Clarity_HX_Description": "CORONARY STENT",
-    "SNOMEDCT_Code": 429639007,
-    "SNOMEDCT_Description": "Percutaneous transluminal balloon angioplasty with insertion of stent into coronary artery (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0062",
     "Clarity_HX_Description": "DOPPLER ECHOCARDIOGRAPHY",
-    "SNOMEDCT_Code": 40701008,
-    "SNOMEDCT_Description": "Echocardiography (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0063",
     "Clarity_HX_Description": "ARTHROPLASTY, HIP",
-    "SNOMEDCT_Code": 397956004,
-    "SNOMEDCT_Description": "Prosthetic arthroplasty of the hip (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0064",
     "Clarity_HX_Description": "INCISIONAL/VENTRAL HERNIA REPAIR",
-    "SNOMEDCT_Code": 84744001,
-    "SNOMEDCT_Description": "Abdominal herniorrhaphy"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0065",
     "Clarity_HX_Description": "IUD",
-    "SNOMEDCT_Code": 65200003,
-    "SNOMEDCT_Description": "Insertion of intrauterine contraceptive device (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0066",
     "Clarity_HX_Description": "ARTHROSCOPY, KNEE",
-    "SNOMEDCT_Code": 309431009,
-    "SNOMEDCT_Description": "Arthroscopy of knee joint (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0067",
     "Clarity_HX_Description": "LAMINECTOMY",
-    "SNOMEDCT_Code": 387731002,
-    "SNOMEDCT_Description": "Laminectomy (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0068",
     "Clarity_HX_Description": "MASTECTOMY",
-    "SNOMEDCT_Code": 172043006,
-    "SNOMEDCT_Description": "Simple mastectomy (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0069",
     "Clarity_HX_Description": "MYRINGOTOMY",
-    "SNOMEDCT_Code": 397926008,
-    "SNOMEDCT_Description": "Myringotomy and drainage of middle ear"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0070",
     "Clarity_HX_Description": "THYROIDECTOMY",
-    "SNOMEDCT_Code": 13619001,
-    "SNOMEDCT_Description": "Thyroidectomy (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0071",
     "Clarity_HX_Description": "TONSILLECTOMY",
-    "SNOMEDCT_Code": 173422009,
-    "SNOMEDCT_Description": "Tonsillectomy (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0072",
     "Clarity_HX_Description": "UMBILICAL HERNIA REPAIR",
-    "SNOMEDCT_Code": 44946007,
-    "SNOMEDCT_Description": "Repair of umbilical hernia (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0073",
     "Clarity_HX_Description": "UPPER GI ENDOSCOPY",
-    "SNOMEDCT_Code": 76009000,
-    "SNOMEDCT_Description": "Esophagogastroduodenoscopy (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0074",
     "Clarity_HX_Description": "HYSTERECTOMY, VAGINAL",
-    "SNOMEDCT_Code": 265056007,
-    "SNOMEDCT_Description": "Vaginal hysterectomy (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0075",
     "Clarity_HX_Description": "REDUCTION MAMMOPLASTY",
-    "SNOMEDCT_Code": 59214008,
-    "SNOMEDCT_Description": "Reduction mammoplasty (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0076",
     "Clarity_HX_Description": "AUGMENTATION MAMMOPLASTY",
-    "SNOMEDCT_Code": 22890008,
-    "SNOMEDCT_Description": "Augmentation mammoplasty (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0077",
     "Clarity_HX_Description": "TRANSURETHRAL RESECTION OF THE PROSTATE",
-    "SNOMEDCT_Code": 90199006,
-    "SNOMEDCT_Description": "Transurethral prostatectomy (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0078",
     "Clarity_HX_Description": "TRANSURETHRAL RESECTION OF BLADDER TUMOR",
-    "SNOMEDCT_Code": 386791007,
-    "SNOMEDCT_Description": "Cystoscopy and transurethral resection of bladder tumor (procedure)"
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0079",
     "Clarity_HX_Description": "IRIDECTOMY W/CORNEOSCLERAL/CORNEAL SECTION",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0080",
     "Clarity_HX_Description": "STRABISMUS SURGERY",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0081",
     "Clarity_HX_Description": "IRIDOTOMY / IRIDECTOMY",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0082",
     "Clarity_HX_Description": "INTRACAPSULAR CATARACT EXTRACTION",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0083",
     "Clarity_HX_Description": "CATARACT EXTRACTION W/� INTRAOCULAR LENS IMPLANT",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0084",
     "Clarity_HX_Description": "CATARACT EXTRACTION",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0085",
     "Clarity_HX_Description": "CAROTID ENDARTERECTOMY",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0086",
     "Clarity_HX_Description": "CAROTID STENT",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0087",
     "Clarity_HX_Description": "CATARACT EXT EXTRACAPSULAR W/ INTRAOCULAR LENS IMPLANTATION",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0088",
     "Clarity_HX_Description": "CATARACT EXT W/ INTRAOCULAR LENS� IMPLANT, BILATERAL",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0089",
     "Clarity_HX_Description": "CATARACT EXT W/ INTRAOCULAR LENS IMPLANT & ANTERIOR VITRECTOMY, BILAT",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0090",
     "Clarity_HX_Description": "CATARACT EXT W/ INTRAOCULAR LENS IMPLANT & ECP",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0091",
     "Clarity_HX_Description": "CATARACT EXT W/ INTRAOCULAR LENS IMPLANT W/ TRABECULECTOMY",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0092",
     "Clarity_HX_Description": "INTRAOCULAR LENS IMPLANT, SECONDARY",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0093",
     "Clarity_HX_Description": "INTRAOCULAR LENS IMPLANT, SECONDARY W/ ANTERIOR VITRECTOMY",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0094",
     "Clarity_HX_Description": "IRIDECTOMY",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0095",
     "Clarity_HX_Description": "RETINAL LASER PROCEDURE",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0096",
     "Clarity_HX_Description": "TRABECULOPLASTY",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "HX0097",
     "Clarity_HX_Description": "INTRAOCULAR LENS INSERTION",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX1266",
     "Clarity_HX_Description": "BREAST LUMPECTOMY W/ NEEDLE LOCALIZATION",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX1267",
     "Clarity_HX_Description": "BREAST MASS EXCISION",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX13",
     "Clarity_HX_Description": "LYMPH NODE DISSECTION",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX1389",
     "Clarity_HX_Description": "CONDYLOMA EXCISION/FULGURATION",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX151",
     "Clarity_HX_Description": "GASTROSTOMY",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX161",
     "Clarity_HX_Description": "COLPOSCOPY",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX163",
     "Clarity_HX_Description": "CYSTOCELE REPAIR",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX171",
     "Clarity_HX_Description": "CARDIAC DEFIBRILLATOR PLACEMENT",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX172",
     "Clarity_HX_Description": "CARDIAC CATHETERIZATION",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX1745",
     "Clarity_HX_Description": "HERNIA MESH REMOVAL",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX1746",
     "Clarity_HX_Description": "HERNIA REPAIR W/ CESAREAN SECTION",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX1812",
     "Clarity_HX_Description": "INCISIONAL BREAST BIOPSY",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX193",
     "Clarity_HX_Description": "INCISIONAL HERNIA REPAIR",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX1948",
     "Clarity_HX_Description": "LASER ABLATION OF CONDYLOMAS",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX201",
     "Clarity_HX_Description": "LYMPH NODE BIOPSY",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX204",
     "Clarity_HX_Description": "VENTRICULOPERITONEAL SHUNT",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX211",
     "Clarity_HX_Description": "HYSTEROSCOPY",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX267",
     "Clarity_HX_Description": "HEART CHAMBER REVISION",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX268",
     "Clarity_HX_Description": "HEART TRANSPLANT",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX312",
     "Clarity_HX_Description": "GASTROSTOMY TUBE CHANGE",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX32",
     "Clarity_HX_Description": "TYMPANOSTOMY TUBE PLACEMENT",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX40",
     "Clarity_HX_Description": "CARDIAC VALVE SURGERY",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX402",
     "Clarity_HX_Description": "GASTROSTOMY CLOSURE",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX424",
     "Clarity_HX_Description": "VENTRAL HERNIA REPAIR",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX53",
     "Clarity_HX_Description": "ABDOMINAL WALL DEFECT REPAIR",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX535",
     "Clarity_HX_Description": "ABDOMINAL AORTIC ANEURYSM REPAIR, ENDOVASCULAR",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX536",
     "Clarity_HX_Description": "ABDOMINAL AORTIC ANEURYSM REPAIR, OPEN",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX537",
     "Clarity_HX_Description": "ABDOMINAL SURGERY",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX539",
     "Clarity_HX_Description": "ABDOMINAL HERNIA REPAIR",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX540",
     "Clarity_HX_Description": "ABDOMINAL WALL SURGERY",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX561",
     "Clarity_HX_Description": "ATRIAL CARDIAC PACEMAKER INSERTION",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX562",
     "Clarity_HX_Description": "A-V CARDIAC PACEMAKER INSERTION",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX583",
     "Clarity_HX_Description": "CARDIAC PACEMAKER PLACEMENT",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX584",
     "Clarity_HX_Description": "CARDIAC SURGERY",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX591",
     "Clarity_HX_Description": "CERVIX LESION DESTRUCTION",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX603",
     "Clarity_HX_Description": "CORONARY ANEURYSM REPAIR",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX604",
     "Clarity_HX_Description": "CORONARY ANGIOPLASTY",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX621",
     "Clarity_HX_Description": "ENDOMETRIAL ABLATION",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX655",
     "Clarity_HX_Description": "GASTROSTOMY TUBE PLACEMENT",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX664",
     "Clarity_HX_Description": "HEART LUNG TRANSPLANT",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX72",
     "Clarity_HX_Description": "BLADDER SUSPENSION",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX78",
     "Clarity_HX_Description": "DILATION AND CURETTAGE OF UTERUS",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX836",
     "Clarity_HX_Description": "VENTRICULAR CARDIAC PACEMAKER INSERTION",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX85",
     "Clarity_HX_Description": "MYOMECTOMY",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX857",
     "Clarity_HX_Description": "GYNECOLOGIC CRYOSURGERY",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX90",
     "Clarity_HX_Description": "ABDOMINAL ADHESION SURGERY",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   },
   {
     "Clarity_HX_Code": "SHX921",
     "Clarity_HX_Description": "COLPORRHAPHY",
-    "SNOMEDCT_Code": "",
-    "SNOMEDCT_Description": ""
+    "UMLS_CUI": "",
+    "UMLS_Name": ""
   }
 ]
