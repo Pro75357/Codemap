@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating'
 import './body.html'
 import '../api/auth.js'
 import { Results } from '../api/results.js'
+import { Codes } from '../api/codes.js'
 
 //Listener for form .PressureInput
 Template.searchBox.events({
@@ -22,11 +23,7 @@ Template.searchBox.events({
 });
 
 Template.body.helpers({
-	results() {
-		//return Meteor.call('results.find');
-		return Results.findOne()
-	},
-	resultsCount() {
+		resultsCount() {
 		return Results.find().count()
 	},
 	resultsPresent() {
@@ -35,5 +32,19 @@ Template.body.helpers({
 		} else {
 			return false;
 		};
+	},
+})
+
+Template.resultsdisplay.helpers({
+	results() {
+		//return Meteor.call('results.find');
+		return Results.find({})
+	}
+})
+
+Template.bigtable.helpers({	
+	codes(){
+		console.log(Codes.find({}).fetch())
+		return Codes.find({})
 	}
 })

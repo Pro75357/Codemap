@@ -23,6 +23,8 @@ twbs:bootstrap
 #d3js:d3
 insecure
 session
+check
+ejson
 
 ###User accounts
 #useraccounts:flow-routing ## 

@@ -9,21 +9,13 @@
 		<div class="container">
 			{{> searchBox}}
 		</div>
-		Results: {{resultsCount}}
-		{{# if resultsPresent}}
-			<hr/>
-			<div class="container">
-				<h4>Results:</h4>
-					<ul>
-					{{#each results.data}}
-						<li>{{ui}}</li>
-						<li>{{rootSource}}</li>
-						<li>{{name}}</li>
-						<li>{{uri}}</li>
-					{{/each}}
-					</ul>
-			</div>
-		{{/if}}
+		<div class="container">
+			<h4>Results:</h4>
+		{{> resultsdisplay}}
+		<hr/>
+		{{> bigtable}}
+
+		</div>
 	{{/if}}
 </body>
 
@@ -55,14 +47,33 @@
 <template name='resultsdisplay'>
 	<ul>
 		{{#each results}}
-			<li>
-				{{#each data}}
-					{{ui}}
-					{{rootSource}}
-					{{name}}
-					{{uri}}
-				{{/each}}
-			</li>
+			{{#each data}}
+				<li>{{name}}</li>
+			{{/each}}
 		{{/each}}
 	</ul>
 </template>
+
+<template name="bigtable">
+	  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Clarity_HX_Code</th>
+        <th>Clarity_HX_Description</th>
+        <th>SNOMEDCT_Code</th>
+        <th>SNOMEDCT_Description</th>
+      </tr>
+    </thead>
+    <tbody>
+	    {{#each codes}}
+	      <tr>
+	        <td>{{Clarity_HX_Code}}</td>
+	        <td>{{Clarity_HX_Description}}</td>
+	        <td>{{SNOMEDCT_Code}}</td>
+	        <td>{{SNOMEDCT_Description}}</td>
+	      </tr>
+		{{/each}}
+    </tbody>
+  </table>
+  </template>
+
