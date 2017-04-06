@@ -96,19 +96,18 @@ var TGT = 'asdf' // invalid init value for TGT
 				}
 			},
 			
-			searchApi: function(searchText){
+			searchApi: function(searchText, searchTarget){
 				this.unblock;
 				try{
-					var call = HTTP.call(
+					var call = 	HTTP.call(
 							"GET", 
 							restroot+'/search/current', 
 							{params: {ticket: Meteor.call('getTicket'), 
 										string: searchText,
-										sabs: 'SNOMEDCT_US',  //SNOMED_CT codes only
+										sabs: searchTarget,  //SNOMED_CT codes only
 										searchType: 'words' //default is 'words'
 										}
-							}
-							
+							},							
 							//function (err, res) {
 								//Remove the only result
 								//Meteor.call('results.remove')
@@ -116,8 +115,8 @@ var TGT = 'asdf' // invalid init value for TGT
 								//Put in a new result
 							//	console.log('result objects: '+res.data.result.results[0])
 								//console.log('CUI: '+res.data.result.results[0].ui)
-							//	return res.data.result.results[0]  //Returns first result object
-							//	}
+								//return JSON.parse(res.data.result.results)  //Returns first result object
+								//}
 							)
 						return call.data.result.results // returns result object
 				} catch(e) {
@@ -126,12 +125,14 @@ var TGT = 'asdf' // invalid init value for TGT
 				}
 			},
 			
-			updateCUI: function(){
+			UMLSFetch: function(searchTarget){
+				this.unblock
 				var code = Codes.find({},{limit: 10}).fetch()
+				console.log('Fetch Search Target: '+searchTarget)
 				for (x in code) {
 					//console.log(code[x].Clarity_HX_Description)
-					var result = Meteor.call('searchApi', code[x].Clarity_HX_Description)
-					console.log(result)
+					var result = Meteor.call('searchApi', code[x].Clarity_HX_Description, searchTarget)
+					//console.log(result)
 					//console.log('CUI in updatefx: '+result.ui)
 					//console.log(code[x]._id)
 					Codes.update({
@@ -145,6 +146,11 @@ var TGT = 'asdf' // invalid init value for TGT
 						$set: {name: result[0].name} // returns name of first result
 					})
 				}
+			},
+
+			resetDB: function() {
+				Codes.update({},{$set: {CUI: ''}}, {multi: true})
+				Codes.update({},{$set: {name: ''}}, {multi: true})
 			}
 			
 		})

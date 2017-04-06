@@ -12,8 +12,8 @@ Template.searchBox.events({
     
     //Just see if hitting submit does anything
     console.log('search submitted');
-    const target = event.target;
-    const searchText = target.text.value;
+    const target = event.target
+    const searchText = target.text.value
     // call get ticket
     const results= Meteor.call('searchApi', searchText); //Searches
     
@@ -22,13 +22,20 @@ Template.searchBox.events({
   },
 });
 
-Template.mega.events({
-	'submit form'(event) {
+Template.buttons.events({
+	'submit .UMLS-button'(event) {
 	    event.preventDefault()
+	    const target = event.target
+	    const searchTarget = target.UMLSTarget.value
+	    console.log('Target: '+searchTarget)
 	   // console.log("mega pressed")
 		//console.log(Codes.find({},{limit: 10} ).fetch())
 	    //console.log(Codes.find({},{limit: 10, fields: {'Clairty_HX_Description':1}} ).fetch())
-	    Meteor.call('updateCUI')
+	    Meteor.call('UMLSFetch', searchTarget)
+	},
+	'submit .ResetDB-button' (event) {
+		event.preventDefault()
+		Meteor.call('resetDB')
 	}
 })
 
@@ -56,5 +63,13 @@ Template.bigtable.helpers({
 	codes(){
 		//console.log(Codes.find({}).fetch())
 		return Codes.find({}, {sort: { Clarity_HX_Codes: 1 }, limit: 10 })
+	}
+})
+
+Template.bigtable.events({
+	'click .coderow': function(event, template){
+		event.preventDefault
+		var rowID = this._id
+		console.log('row id: '+rowID)
 	}
 })
