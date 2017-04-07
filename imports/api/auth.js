@@ -148,11 +148,7 @@ var TGT = 'asdf' // invalid init value for TGT
 				}
 			},
 
-			resetDB: function() {
-				Codes.update({},{$set: {CUI: ''}}, {multi: true})
-				Codes.update({},{$set: {name: ''}}, {multi: true})
-			}
-			
+		
 		})
 		Meteor.call('getTGT');
 		//Meteor.call('ticketTest');

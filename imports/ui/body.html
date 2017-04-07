@@ -5,6 +5,8 @@
   </div>
 	{{#if currentUser}}
 		<div class="container">
+      {{> upload}}
+      <br/>
 			{{> buttons}}
 		</div>
 		<div class="container">
@@ -16,24 +18,18 @@
 
 <!-- HERE BE TEMPLATES -->
 
-<template name='searchBox'>
-<div class="container">
-  <h2>Enter search term</h2>
-  <form class='form-inline'>
-  <label class="mr-sm-2" for="inlineFormCustomSelect">Source Codes</label>
-  <select id="inlineFormCustomSelect">
-
-  </select>
-
-    <div class="form-group">
-      <input type="search" name ="text" class="form-control" placeholder="Enter search term here">
-    </div>
-    <button type="submit" class="btn btn-default">Submit</button>
-    <div class="checkbox">
-      <label><input type="checkbox"> Exact match only</label>
-    </div>
-  </form>
-</div>
+<template name='upload'>
+  <div class="container">
+    <h4>Upload source codes + description</h4>
+    
+    {{#unless uploading}}
+      <form class='upload' method="POST" enctype='multipart/form-data'>
+        <input type='file' name="uploadCSV">
+      </form>
+    {{else}}
+      <p><i class = 'fa fa-spin fa-refresh'></i> Uploading files...</p>
+    {{/unless}}
+  </div>
 </template>
 
 <template name='resultsdisplay'>
@@ -44,6 +40,10 @@
 			{{/each}}
 		{{/each}}
 	</ul>
+</template>
+
+<template name='searchBox'>
+For future use
 </template>
 
 <template name="bigtable">

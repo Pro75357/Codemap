@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating'
 import './body.html'
 import '../api/auth.js'
+import '../api/upload.js'
 import { Results } from '../api/results.js'
 import { Codes } from '../api/codes.js'
 
