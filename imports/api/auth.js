@@ -127,37 +127,32 @@ var TGT = 'asdf' // invalid init value for TGT
 			
 			UMLSFetch: function(searchTarget){
 				this.unblock
-				var code = Codes.find({},{limit: 10}).fetch()
+				var code = Codes.find({},{limit: 50}).fetch()
 				console.log('Fetch Search Target: '+searchTarget)
 				for (x in code) {
 					//console.log(code[x].Clarity_HX_Description)
-					var result = Meteor.call('searchApi', code[x].Clarity_HX_Description, searchTarget)
+					var result = Meteor.call('searchApi', code[x].Source_Desc, searchTarget)
 					//console.log(result)
 					//console.log('CUI in updatefx: '+result.ui)
 					//console.log(code[x]._id)
 					Codes.update({
 						_id: code[x]._id
 						},{
-							$set: {CUI: result[0].ui } //returns CUI of first result.
+							$set: {Target_Code: result[0].ui } //returns CUI of first result.
 					})
 					Codes.update({
 						_id: code[x]._id
 					},{
-						$set: {name: result[0].name} // returns name of first result
+						$set: {Target_Desc: result[0].name} // returns name of first result
 					})
 				}
-			},
-
-		
+			},		
 		})
 		Meteor.call('getTGT');
 		//Meteor.call('ticketTest');
 		console.log('Ready to Search!')
 	}
-	
 
-
-	
 	//function getTicket() {
 	//	try HTTP.call(POST, root+'', {params: {}})
 //	}

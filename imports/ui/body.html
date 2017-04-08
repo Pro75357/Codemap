@@ -20,7 +20,7 @@
 
 <template name='upload'>
   <div class="container">
-    <h4>Upload source codes + description</h4>
+    <h4>Upload 2-column CSV with rows:  "Source_Code" and "Source_Desc"</h4>
     
     {{#unless uploading}}
       <form class='upload' method="POST" enctype='multipart/form-data'>
@@ -47,26 +47,28 @@ For future use
 </template>
 
 <template name="bigtable">
+  <div height='300' Style="overflow: auto">
 	  <table class="table table-hover">
     <thead>
       <tr>
-        <th>Clarity_HX_Code</th>
-        <th>Clarity_HX_Description</th>
-        <th>UMLS CUI</th>
-        <th>UMLS Name</th>
+        <th>Source Code</th>
+        <th>Source Desc</th>
+        <th>Target Code</th>
+        <th>Target Desc</th>
       </tr>
     </thead>
     <tbody>
 	    {{#each codes}}
 	      <tr class = 'coderow'>
-	        <td class="col-sm-1">{{Clarity_HX_Code}}</td>
-	        <td class="col-sm-1">{{Clarity_HX_Description}}</td>
-	        <td class="col-sm-1">{{CUI}}</td>
-	        <td class="col-sm-1">{{name}}</td>
+	        <td class="col-sm-1">{{Source_Code}}</td>
+	        <td class="col-sm-1">{{Source_Desc}}</td>
+	        <td class="col-sm-1">{{Target_Code}}</td>
+	        <td class="col-sm-1">{{Target_Desc}}</td>
 	      </tr>
 		{{/each}}
     </tbody>
   </table>
+  </div>
   </template>
   
   <template name = "buttons">
@@ -89,6 +91,9 @@ For future use
       <div class="pull-right">
         <form class='ResetDB-button'>
           <input type="submit" class="btn btn-warning" value="Reset DB"/>
+        </form>
+        <form class='magic-button'>
+          <input type="submit" class="btn btn-warning" value="Magic"/>
         </form>
       </div>
     </div>
