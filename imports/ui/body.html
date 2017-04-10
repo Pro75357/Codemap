@@ -8,6 +8,7 @@
       {{> upload}}
       <br/>
 			{{> buttons}}
+      {{> export}}
 		</div>
 		<div class="container">
   		<hr/>
@@ -98,3 +99,7 @@ For future use
       </div>
     </div>
   </template>
+
+<template name="export">
+  <button class="export-data btn btn-success" data-loading-text="Exporting...">Export Data</button>
+</template>

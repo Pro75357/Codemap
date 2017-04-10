@@ -14,7 +14,7 @@ if (Meteor.isClient) {
 
 	// upload based on tutorial: https://themeteorchef.com/tutorials/importing-csvs
 	Template.upload.events({  
-		'change .upload' (event, template) {
+		'change .upload': function(event, template) {
 			event.preventDefault();
 			//console.log("New CSV submitted")
 			//console.log("event: "+ event.target.files[0])
