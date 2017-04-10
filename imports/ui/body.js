@@ -1,6 +1,8 @@
 import { Template } from 'meteor/templating'
 import './body.html'
 import '../api/auth.js'
+import '../api/upload.js'
+import '../api/export.js'
 import { Results } from '../api/results.js'
 import { Codes } from '../api/codes.js'
 
@@ -36,6 +38,12 @@ Template.buttons.events({
 	'submit .ResetDB-button' (event) {
 		event.preventDefault()
 		Meteor.call('resetDB')
+		console.log('Database Full Reset')
+	},
+
+	'submit .magic-button' (event) {
+		event.preventDefault();
+		console.log('Magic!');  // this is just for testing method calls
 	}
 })
 
@@ -60,9 +68,15 @@ Template.resultsdisplay.helpers({
 })
 
 Template.bigtable.helpers({	
+	//tableColumn1(){
+	//	return codesColumns[1] // return name of tableColumn1
+	//},
+	//tableColumn2(){
+	//	return codesColumns[2] //console.log(Codes.)
+	//},
 	codes(){
 		//console.log(Codes.find({}).fetch())
-		return Codes.find({}, {sort: { Clarity_HX_Codes: 1 }, limit: 10 })
+		return Codes.find({}, {sort: { Source_Code: 1 }, limit: 50 })
 	}
 })
 
@@ -71,5 +85,6 @@ Template.bigtable.events({
 		event.preventDefault
 		var rowID = this._id
 		console.log('row id: '+rowID)
+		console.log(Codes.find({_id: rowID}).fetch())
 	}
 })
