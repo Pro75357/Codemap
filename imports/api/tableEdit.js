@@ -61,5 +61,11 @@ if (Meteor.isServer){
 				}
 			})
 		},
+
+		'editOne': function(rowID) {
+			console.log('need to edit this one')
+			// Todo: function that allows editing the current result. 
+			// Will be difficult. 
+		}
 	})
 }

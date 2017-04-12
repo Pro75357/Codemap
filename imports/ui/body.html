@@ -56,23 +56,28 @@ For future use
         <th>Source Desc</th>
         <th>Target Code</th>
         <th>Target Desc</th>
-        <th>Result Code</th>
-        <th>Result Desc</th>
-        <th><button class='btn btn-warning saveallbutton'>Save ALL?</button></th>
+        <th><button class='btn btn-warning saveallbutton'>Save ALL?</button></th>      
+        <th class='bg-info'>Result Code</th>
+        <th class='bg-info'>Result Desc</th>
       </tr>
     </thead>
     <tbody>
 	    {{#each codes}}
 	      <tr class = 'coderow'>
-	        <td class="col-sm-1">{{Source_Code}}</td>
-	        <td class="col-sm-1">{{Source_Desc}}</td>
-	        <td class="col-sm-1">{{Target_Code}}</td>
-	        <td class="col-sm-1">{{Target_Desc}}</td>
-          <td class="col-sm-1" style='color: darkgreen'>{{Result_Code}}</td>
-          <td class="col-sm-1" style='color: darkgreen'>{{Result_Desc}}</td>
-          <td class='col-sm-1'><button class='btn btn-primary saveButton'>Save</button></td>
-          <td class='col-sm-1'><button class='btn btn-primary editButton'>Edit</button></td>
-          <td class='col-sm-1'><button class='btn btn-warning removeButton'>Remove</button></td>
+	        <td class="col-12">{{Source_Code}}</td>
+	        <td class="col-12 col-md-auto">{{Source_Desc}}</td>
+	        <td class="col-12">{{Target_Code}}</td>
+	        <td class="col-12 col-md-auto">{{Target_Desc}}</td>
+          <td class='col float-right' style='width: 250px'>
+            <div class='btn-group'>
+              <button class='btn btn-primary saveButton'>Save</button>
+              <button class='btn btn-primary editButton'>Edit</button>
+              <button class='btn btn-warning removeButton'>Remove</button>
+            </div>
+          </td>  
+          <td class="col-12 bg-info" >{{Result_Code}}</td>
+          <td class="col-12 col-md-auto bg-info">{{Result_Desc}}</td>
+
 	      </tr>
 		{{/each}}
     </tbody>
