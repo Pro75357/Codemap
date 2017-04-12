@@ -1,1 +1,1 @@
-cmd /k meteor
+cmd /k meteor --port 3995

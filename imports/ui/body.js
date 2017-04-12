@@ -4,6 +4,7 @@ import '../api/auth.js'
 import '../api/search.js'
 import '../api/upload.js'
 import '../api/export.js'
+import '../api/tableEdit.js'  // perhaps not necessary as all server?
 import { Results } from '../api/results.js'
 import { Codes } from '../api/codes.js'
 
@@ -89,5 +90,25 @@ Template.bigtable.events({
 		var rowID = this._id
 		console.log('row id: '+rowID)
 		console.log(Codes.find({_id: rowID}).fetch())
-	}
+	},
+
+	'click .saveallbutton': function(event, template){
+		event.preventDefault
+		console.log('clicked saveallbutton')
+		Meteor.call('saveAll')
+	},
+
+	'click .removeButton': function(event, template){
+		event.preventDefault
+		console.log('clicked removeButton')
+		var rowID = this._id
+		Meteor.call('removeOne', rowID)
+	},
+
+	'click .saveButton': function(event, template){
+		event.preventDefault
+		console.log('clicked saveButton')
+		var rowID = this._id
+		Meteor.call('saveOne', rowID)
+	},
 })

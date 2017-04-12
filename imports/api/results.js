@@ -1,6 +1,6 @@
 import { Mongo } from 'meteor/mongo'
 
-export const Results = new Mongo.Collection(null);
+export const Results = new Mongo.Collection('results');
 
 /*
 if (Meteor.isClient) {
@@ -10,7 +10,7 @@ if (Meteor.isServer) {
 	Meteor.publish('results', function resultsPublication() {
 		return Results.find();
 	})
-*/
+//
 if (Meteor.isServer) {
 	Meteor.methods({
 		'results.insert'(result) {
@@ -32,3 +32,5 @@ if (Meteor.isServer) {
 		}
     });
 }
+
+*/
