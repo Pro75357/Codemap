@@ -81,6 +81,15 @@ Template.bigtable.helpers({
 		return Codes.find({},
 		 {sort: { Source_Code: 1 }}
 		 )
+	},
+	results(param){
+		var res = Results.findOne({rowID: this._id})//[0]['9baHEbaymGWDRngmu']
+		//console.dir(res)
+		//console.dir(res)
+		if (typeof res === 'undefined'){
+			return []
+		}
+		return res.result
 	}
 })
 
@@ -89,7 +98,7 @@ Template.bigtable.events({
 		event.preventDefault
 		var rowID = this._id
 		console.log('row id: '+rowID)
-		console.log(Codes.find({_id: rowID}).fetch())
+		//console.log(Codes.find({_id: rowID}).fetch())
 	},
 
 	'click .saveallbutton': function(event, template){

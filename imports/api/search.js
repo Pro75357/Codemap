@@ -49,7 +49,7 @@ if (Meteor.isServer) {
 				console.log('Searching: '+code[x].Source_Desc)
 				var result = Meteor.call('searchApi', code[x].Source_Desc, searchTarget) // result is an array of all the results. 
 				console.log('result: '+result[0].name) // the first result is result[0], it's elements depend on which API call is used.
-				//console.log(result)
+				//console.dir(result)
 				//console.log('CUI in updatefx: '+result.ui)
 				//console.log(code[x]._id)
 
@@ -62,14 +62,15 @@ if (Meteor.isServer) {
 				Codes.update({
 					_id: code[x]._id // same for the result name
 				},{
+					//$push: {result}
 					$set: {Result_Desc: result[0].name} //adds the name to the "Target_Desc" field
 				})
-
+				//console.log(Codes.find({_id: code[x]._id}).result[0])
 				//Add the corresponding Codes _id to the result array
-				result.push(code[x]._id)
+				//result.push({row_id: code[x]._id})
 
 				// Now, save the results (not just first one) in a different collection, Results, along with the corresponding _id from the Codes database
-				Results.insert(result)  // UNTESTED... but does not error. :)
+				Results.insert({ rowID: code[x]._id, result})  // UNTESTED... but does not error. :)
 
 			}
 		}

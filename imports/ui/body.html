@@ -75,7 +75,14 @@ For future use
               <button class='btn btn-warning removeButton'>Remove</button>
             </div>
           </td>  
-          <td class="col-12 bg-info" >{{Result_Code}}</td>
+          <td class="col-12 bg-info">
+            <select>
+            {{#each results}}
+
+              <option value = 'form input'>{{name}} -- {{ui}}</option>
+            {{/each}}
+            </select>
+          </td>
           <td class="col-12 col-md-auto bg-info">{{Result_Desc}}</td>
 
 	      </tr>
