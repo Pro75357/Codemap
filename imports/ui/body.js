@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating'
 import './body.html'
 import '../api/auth.js'
+import '../api/search.js'
 import '../api/upload.js'
 import '../api/export.js'
 import { Results } from '../api/results.js'
@@ -76,7 +77,9 @@ Template.bigtable.helpers({
 	//},
 	codes(){
 		//console.log(Codes.find({}).fetch())
-		return Codes.find({}, {sort: { Source_Code: 1 }, limit: 50 })
+		return Codes.find({},
+		 {sort: { Source_Code: 1 }}
+		 )
 	}
 })
 
