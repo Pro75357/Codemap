@@ -29,10 +29,15 @@ if (Meteor.isServer){
            //console.log(rowID + ' ' + selectID)
             //CUI = Codes.find({ _id: rowID }, function (result) { return result.ui === selectID })
             res = Meteor.call('searchCUI', selectID, searchTarget)
-            TC = res[0].code
+            TCurl = res[0].code // The first resulted code. Is a whole https url.
+            TCsplit = TCurl.split("/") // split the URL by / 
+            //console.log('Split: '+TCsplit) //- works
+        //    console.log('TCsplit Lenght: ' + TCsplit.length)
+            TC = TCsplit[(TCsplit.length - 1)] // - we only want the last bit
+
             TD = res[0].name
-            console.log("TC: " + TC)
-            console.log("TD: " + TD)
+            //console.log("TC: " + TC)
+           // console.log("TD: " + TD)
             Codes.update(
                 { _id: rowID },
                 {

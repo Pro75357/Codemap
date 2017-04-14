@@ -29,12 +29,12 @@ Template.searchBox.events({
 Template.buttons.events({
 	'submit .UMLS-button'(event) {
         event.preventDefault()
-        var searchTarget = document.getElementById('searchTarget').value
-	    console.log('Target: '+searchTarget)
+       // var searchTarget = document.getElementById('searchTarget').value
+	   // console.log('Target: '+searchTarget)
 	   // console.log("mega pressed")
 		//console.log(Codes.find({},{limit: 10} ).fetch())
 	    //console.log(Codes.find({},{limit: 10, fields: {'Clairty_HX_Description':1}} ).fetch())
-	    Meteor.call('UMLSFetch', searchTarget)
+	    Meteor.call('UMLSFetch')
 	},
 	'submit .ResetDB-button' (event) {
 		event.preventDefault()
@@ -124,7 +124,7 @@ Template.bigtable.events({
 		event.preventDefault
 		console.log('clicked saveButton')
         var rowID = this._id
-        var selectID = document.getElementById('resultSelect').value
+        var selectID = document.getElementById(this._id+'resultSelect').value
         var searchTarget = document.getElementById('searchTarget').value
        // console.log(selectID)
 		Meteor.call('saveOne', rowID, selectID, searchTarget)

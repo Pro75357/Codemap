@@ -30,7 +30,7 @@ if (Meteor.isServer) {
             }
         },
 	
-		'searchApi': function(searchText, searchTarget){
+		'searchApi': function(searchText){
 			this.unblock;
 			try{
 				var call = 	HTTP.call(
@@ -38,7 +38,7 @@ if (Meteor.isServer) {
 						restroot+'/search/current', 
 						{params: {ticket: Meteor.call('getTicket'), 
 									string: searchText,
-									sabs: searchTarget,  //SNOMED_CT codes only
+									//sabs: searchTarget,  //SNOMED_CT codes only
 									searchType: 'words' //default is 'words'
 									}
 						},							
@@ -60,14 +60,14 @@ if (Meteor.isServer) {
 			}
 		},
 		// This is the method that searches the UMLS database against every imported "Source_Desc"
-		'UMLSFetch': function(searchTarget){
+		'UMLSFetch': function(){
 			this.unblock
 			//Results.rawCollection().drop() // clear previous results. 
 			var code = Codes.find({}, {sort: { Source_Code: 1 }}).fetch() // gets all the codes from the collection, in order of the table (so they update in the right order)
 			//console.log('Fetch Search Target: '+searchTarget)
 			for (x in code) {
 				console.log('Searching: '+code[x].Source_Desc)
-				var result = Meteor.call('searchApi', code[x].Source_Desc, searchTarget) // result is an array of all the results. 
+				var result = Meteor.call('searchApi', code[x].Source_Desc) // result is an array of all the results. 
 				//console.log('result: '+result[0].name) // the first result is result[0], it's elements depend on which API call is used.
 				//console.dir(result)
 				//console.log('CUI in updatefx: '+result.ui)
