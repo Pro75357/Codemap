@@ -30,7 +30,6 @@ How to use it (as of 4/16/2017)
   C. once the table is populated to your liking, the "export" button will export a CSV of your data.
   
   Known issues:
-   - is very slow. Would love to make asynchronous API calls but this makes errors. 
    - the database will persist across sessions. Use "resetDB" button to wipe it. Will wipe on a new import, though.
    - code display under the search box can be wrong after new single-row search. A saved code will still be correct. 
    - user accounts are worthless
@@ -39,5 +38,4 @@ How to use it (as of 4/16/2017)
    Todo: 
     - need better way (YAML file? Dialog box?) to handle API key stuff
     - paging capabilities
-    - make it faster
     - make the search things hidden unless some event (edit button or similar)
