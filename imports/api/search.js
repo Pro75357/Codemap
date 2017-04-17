@@ -40,20 +40,31 @@ if (Meteor.isServer) {
         },
 
 
-		'searchApi': function(searchText, searchType, searchTarget){ 
+		'searchApi': function(searchText, searchType, searchTarget, rowID){ 
 			try{
-				var call = 	HTTP.call(
+				HTTP.call(
 						"GET", 
 						restroot+'/search/current', 
 						{params: {ticket: Meteor.call('getTicket'), 
 									string: searchText,
-									sabs: searchTarget,  //SNOMED_CT codes only
+									//sabs: '',  //SNOMED_CT codes only
 									searchType: searchType //default is 'words', also: 'exact' for codes
 									}
-						},							
+						},	
+                        function(error, res) {
+                            if  ( error ) {
+                                console.log(err)
+                            } else {
+                                var result = res.data.result.results
+                                Results.insert({ rowID: rowID, createdAt: new Date(), result })  //
+                                var selectID =  result[0].ui //Just get first result in this case
+                                Meteor.call('getConceptCodes', rowID, selectID, searchTarget)
+                                //Meteor.call('insertResult', rowID, selectID, searchTarget, result)
+                            }
+                        }
 				    )
 					//console.dir(call.data.result.results)
-				return call.data.result.results // returns result object
+				//return call.data.result.results // returns result object
 			} catch(e) {
 				console.log(e);
 				return false;
@@ -67,16 +78,9 @@ if (Meteor.isServer) {
 			//console.log('Fetch Search Target: '+searchTarget)
 			for (x in code) {
 				console.log('Searching: '+code[x].Source_Desc)
-				var result = Meteor.call('searchApi', code[x].Source_Desc, 'words', '') // result is an array of all the results. 
-
-				// Now, save the results (not just first one) in a different collection, Results, along with the corresponding _id from the Codes database
-                Results.insert({ rowID: code[x]._id, createdAt: new Date(), result })  // UNTESTED... but does not error. :)
-
                 rowID = code[x]._id
-                //console.dir(result)
-                selectID = result[0].ui
-                //console.log(selectID)
-                Meteor.call('getConceptCodes', rowID, selectID, searchTarget)
+                //selectID = result[0].ui
+                Meteor.call('searchApi', code[x].Source_Desc, 'exact', searchTarget, rowID) 
 
 			}
         },
@@ -87,16 +91,15 @@ if (Meteor.isServer) {
             //console.log('Fetch Search Target: '+searchTarget)
             for (x in code) {
                 console.log('Searching: ' + code[x].Source_Code)
-                var result = Meteor.call('searchApi', code[x].Source_Code, 'exact') // result is an array of all the results. 
-
-                // Now, save the results (not just first one) in a different collection, Results, along with the corresponding _id from the Codes database
-                Results.insert({ rowID: code[x]._id, createdAt: new Date(), result })  // UNTESTED... but does not error. :)
-
                 rowID = code[x]._id
-                selectID = result[0].ui
-                console.log(selectID)
-                Meteor.call('getConceptCodes', rowID, selectID, searchTarget)
+                //selectID = result[0].ui
+                Meteor.call('searchApi', code[x].Source_Code, 'exact', searchTarget, rowID) // result is an array of all the results. 
             }
         },
+
+       // 'insertResult': function(rowID, selectID, searchTarget, result) {
+
+       // },
+
 	})
 }
