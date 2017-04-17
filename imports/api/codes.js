@@ -1,5 +1,5 @@
 import { Mongo } from 'meteor/mongo'
-
+import { Results } from './results.js'
 export const Codes = new Mongo.Collection('codes');
 
 if (Meteor.isClient) {
@@ -12,8 +12,9 @@ if (Meteor.isServer) {
 	})
 
 	Meteor.methods({
-		resetDB: function() {
-		Codes.rawCollection().drop()
+		'resetDB': function() {
+            Codes.rawCollection().drop()
+            Results.rawCollection().drop()
 		Codes.insert({Source_Code: null})
 		Codes.update({}, {$set: {Source_Desc: 'No data: Please upload CSV'}})
 		codesColumns = [] // clear column names variable
