@@ -11,15 +11,6 @@ if (Meteor.isServer) {
 	
     Meteor.methods({
 
-        //Search that is called from the single search box
-        'searchAgain': function (rowID, searchText, searchTarget) {
-            var result = Meteor.call('searchApi', searchText, 'words', '')
-            //Results.remove({rowID: [rowID]}) // removes the original results
-            Results.insert({ rowID: rowID, createdAt: new Date, result }) // places new results
-            selectID = result[0].ui
-            Meteor.call('getConceptCodes', rowID, selectID, searchTarget)
-        },
-
         //Second-level search - retruns 'atoms' for a Concept Unique Identifier (CUI)
         // CUI is the main code returned from searchApi method
 
@@ -76,6 +67,35 @@ if (Meteor.isServer) {
 			}
 		},
 
+        // This gets the actual codes for the selected searchTarget and puts it into the Codes collection where it will pull into the view.
+        'getConceptCodes': function (rowID, selectID, searchTarget) {
+            res = Meteor.call('searchCUI', selectID, searchTarget)
+            //console.dir(res)
+            // if no result just return no results instead of error on the next line
+            if (typeof res[0] === 'undefined') {
+                TC = 'NONE'
+            } else {
+                TCurl = res[0].code // The first resulted code. Is a whole https url.
+                TCsplit = TCurl.split("/") // split the URL by / 
+                TC = TCsplit[(TCsplit.length - 1)] // - we only want the last bit
+            }
+            // Update the table with the result
+            Codes.update(
+                { _id: rowID },
+                {
+                    $set: {
+                        Concept_Code: TC,
+                    }
+                }
+            )
+        },
+
+                //Search that is called from the single search box
+        'searchAgain': function (rowID, searchText, searchTarget) {
+            //Results.remove({rowID: [rowID]}) // removes the original results
+            Meteor.call('searchApi', searchText, 'words', searchTarget, rowID)
+        },
+
 		// This is the method that searches the UMLS database against every imported "Source_Desc". Is the MAIN batch function. 
 		'descFetch': function(searchTarget){
 			Results.rawCollection().drop() // clear any previous results. 
@@ -89,7 +109,7 @@ if (Meteor.isServer) {
         },
 
         // this does the exact same thing as 'descFetch' but uses the CODES field and an 'exact' match. 
-            'codesFetch': function (searchTarget) {
+        'codesFetch': function (searchTarget) {
             Results.rawCollection().drop() // clear previous results. 
             var code = Codes.find({}, { sort: { Source_Code: 1 } }).fetch()
             for (x in code) {

@@ -3,28 +3,6 @@ import { Codes } from './codes.js'
 if (Meteor.isServer){
     Meteor.methods({
 
-        // This gets the actual codes for the selected searchTarget and puts it into the Codes collection where it will pull into the view.
-        'getConceptCodes': function (rowID, selectID, searchTarget) {
-            res = Meteor.call('searchCUI', selectID, searchTarget)
-            //console.dir(res)
-            // if no result just return no results instead of error on the next line
-            if (typeof res[0] === 'undefined') {
-                TC = 'NONE'
-            } else {
-                TCurl = res[0].code // The first resulted code. Is a whole https url.
-                TCsplit = TCurl.split("/") // split the URL by / 
-                TC = TCsplit[(TCsplit.length - 1)] // - we only want the last bit
-            }
-            // Update the table with the result
-            Codes.update(
-                { _id: rowID },
-                {
-                    $set: {
-                        Concept_Code: TC,
-                    }
-                }
-            )
-        },
 
         // This saves a single selected (selectID) result to the Codes table in the Target fields.
         'saveOne': function (rowID, selectID, searchTarget) {
