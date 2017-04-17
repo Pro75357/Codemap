@@ -1,7 +1,7 @@
 import { Codes } from './codes.js'
 
 if (Meteor.isServer){
-	Meteor.methods({
+    Meteor.methods({
 
 		'saveAll': function(){
 		console.log("All results saved to targets")
@@ -24,83 +24,62 @@ if (Meteor.isServer){
 				}
 			}		
         },
-
-        'saveOne': function (rowID, selectID, searchTarget) {
-           //console.log(rowID + ' ' + selectID)
-            //CUI = Codes.find({ _id: rowID }, function (result) { return result.ui === selectID })
+        'getConceptCodes': function (rowID, selectID, searchTarget) {
             res = Meteor.call('searchCUI', selectID, searchTarget)
-            TCurl = res[0].code // The first resulted code. Is a whole https url.
-            TCsplit = TCurl.split("/") // split the URL by / 
-            //console.log('Split: '+TCsplit) //- works
-        //    console.log('TCsplit Lenght: ' + TCsplit.length)
-            TC = TCsplit[(TCsplit.length - 1)] // - we only want the last bit
-
-            TD = res[0].name
-            //console.log("TC: " + TC)
-           // console.log("TD: " + TD)
+            //console.dir(res)
+            // if no result just return no results instead of error on the next line
+            if (typeof res[0] === 'undefined') {
+                TC = 'NONE'
+            } else {
+                TCurl = res[0].code // The first resulted code. Is a whole https url.
+                TCsplit = TCurl.split("/") // split the URL by / 
+                TC = TCsplit[(TCsplit.length - 1)] // - we only want the last bit
+            }
+            // Update the table with the result
             Codes.update(
                 { _id: rowID },
                 {
                     $set: {
-                        Target_Code: TC,
-                        Target_Desc: TD
-                    }}
-
+                        Concept_Code: TC,
+                    }
+                }
             )
         },
 
-        'findCodes': function (rowID, selectedID, searchTarget) {
+        'saveOne': function (rowID, selectID, searchTarget) {
+            res = Meteor.call('searchCUI', selectID, searchTarget)
+            console.dir(res)
+            // if no result just return no results instead of error on the next line
+            if (typeof res[0] === 'undefined') {
+                TC = 'NONE'
+                TD = 'No Result'
+            } else {
+                TCurl = res[0].code // The first resulted code. Is a whole https url.
+                TCsplit = TCurl.split("/") // split the URL by / 
+                //console.log('Split: '+TCsplit) //- works
+                //    console.log('TCsplit Lenght: ' + TCsplit.length)
+                TC = TCsplit[(TCsplit.length - 1)] // - we only want the last bit
+
+                TD = res[0].name // Gets name of first object
+            }
+             // Update the table with the result
+                Codes.update(
+                    { _id: rowID },
+                    {
+                        $set: {
+                            Target_Code: TC,
+                            Target_Desc: TD
+                        }
+                    }
+
+                )
+        },
+        /*
+        'findCodes': function (rowID, selectID, searchTarget) {
             searchCUI = Codes.findOne({ _id: rowID }, function (result) { return result.ui === selectID })
             res = Meteor.call('searchCUI', searchCUI, searchTarget)
             console.dir(res)
         },
-            //RD = Codes.findOne({ _id: rowID }).Result_Desc
-
-            // Make sure they are not '' otherwise will overwrite with null.
-            /*
-            if (RC == '') {
-                return false
-            } else {
-                Codes.update(
-                    { _id: rowID }, // the document to update
-                    {
-                        $set: {
-                            Target_Code: RC, // updates the Target code with current Result_code
-                            Target_Desc: RD, // updates the Target Description with current Result desc
-                            Result_Code: '', // clears the displayed result_code
-                            Result_Desc: '',  // clears the displayed result_desc
-                        }
-                    }
-                )
-            }
-        }
-
-            */
-        /*
-		'saveOne': function(rowID){
-			console.log('result saved')
-			// saves the individually clicked result.
-			
-			// First get the result in variable
-			RC= Codes.findOne({_id: rowID}).Result_Code
-			RD= Codes.findOne({_id: rowID}).Result_Desc
-
-			// Make sure they are not '' otherwise will overwrite with null.
-			if (RC == '') {
-				return false
-			} else {
-				Codes.update(
-					{_id: rowID}, // the document to update
-					{$set: { 
-						Target_Code: RC, // updates the Target code with current Result_code
-						Target_Desc: RD, // updates the Target Description with current Result desc
-						Result_Code: '', // clears the displayed result_code
-						Result_Desc: '',  // clears the displayed result_desc
-						}
-					}
-				)
-			}
-		},
         */
 		'removeOne': function(rowID){
 			console.log('result deleted')

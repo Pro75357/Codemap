@@ -63,7 +63,7 @@ if (Meteor.isServer) {
 				},
 		*/
 			'getTGT': function (){
-				this.unblock(); // make sure server doesn't get block from this call ??
+				//this.unblock(); // make sure server doesn't get block from this call ??
 				//console.log('getting TGT...')
 				console.log('TGT apiKey: '+thisApiKey); //print API key=
 				try{
@@ -81,13 +81,13 @@ if (Meteor.isServer) {
 			
 			//Get one-time ticket using TGT
 			'getTicket': function(){
-				this.unblock; // no idea
+				//this.unblock; // no idea
 				//console.log('getting new single ticket')
 				//console.log('Using TGT: '+TGT);
 				try{
 					this.call = HTTP.call("POST", TGT, {params: {service: 'http://umlsks.nlm.nih.gov'}});
 					var ticket = this.call.content;
-					//console.log('New single-use ticket: '+ticket);
+					console.log('New single-use ticket: '+ticket);
 					return ticket;
 				} catch (e) {
 					console.log(e);
