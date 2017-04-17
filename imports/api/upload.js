@@ -1,7 +1,12 @@
+// This is where the methods that handle the file upload live.
+
 import { Codes } from './codes.js'
 
-codesColumns = []
+//codesColumns = []
+
 if (Meteor.isClient) {
+
+	// Helper for the loading icon
 	Template.upload.onCreated( () => {
 		Template.instance().uploading = new ReactiveVar( false )
 	})

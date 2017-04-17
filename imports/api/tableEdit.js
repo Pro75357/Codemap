@@ -3,27 +3,7 @@ import { Codes } from './codes.js'
 if (Meteor.isServer){
     Meteor.methods({
 
-		'saveAll': function(){
-		console.log("All results saved to targets")
-		// Todo: Function should put all Results in targets. and delete results?
-		var code = Codes.find({}, {sort: { Source_Code: 1 }}).fetch() // gets all the codes from the collection, in order of the table (so they update in the right order)
-			for (x in code) {  // iterate over the whole table
-				if (Codes.findOne({_id: code[x]._id}).Result_Code == ''){ // Don't save the blanks
-				console.log('not saving a blank')
-				} else {
-					Codes.update(
-						{_id: code[x]._id}, // the document to update
-						{$set: { 
-							Target_Code: code[x].Result_Code, // updates the Target code with current Result_code
-							Target_Desc: code[x].Result_Desc, // updates the Target Description with current Result desc
-							Result_Code: '', // clears the displayed result_code
-							Result_Desc: '',  // clears the displayed result_desc
-							}
-						}
-					)
-				}
-			}		
-        },
+        // This gets the actual codes for the selected searchTarget and puts it into the Codes collection where it will pull into the view.
         'getConceptCodes': function (rowID, selectID, searchTarget) {
             res = Meteor.call('searchCUI', selectID, searchTarget)
             //console.dir(res)
@@ -46,9 +26,10 @@ if (Meteor.isServer){
             )
         },
 
+        // This saves a single selected (selectID) result to the Codes table in the Target fields.
         'saveOne': function (rowID, selectID, searchTarget) {
             res = Meteor.call('searchCUI', selectID, searchTarget)
-            console.dir(res)
+            //console.dir(res)
             // if no result just return no results instead of error on the next line
             if (typeof res[0] === 'undefined') {
                 TC = 'NONE'
@@ -59,7 +40,6 @@ if (Meteor.isServer){
                 //console.log('Split: '+TCsplit) //- works
                 //    console.log('TCsplit Lenght: ' + TCsplit.length)
                 TC = TCsplit[(TCsplit.length - 1)] // - we only want the last bit
-
                 TD = res[0].name // Gets name of first object
             }
              // Update the table with the result
@@ -74,13 +54,8 @@ if (Meteor.isServer){
 
                 )
         },
-        /*
-        'findCodes': function (rowID, selectID, searchTarget) {
-            searchCUI = Codes.findOne({ _id: rowID }, function (result) { return result.ui === selectID })
-            res = Meteor.call('searchCUI', searchCUI, searchTarget)
-            console.dir(res)
-        },
-        */
+
+        // This removes a result from the target fields based on the row. 
 		'removeOne': function(rowID){
 			console.log('result deleted')
 			//Todo: make function that deletes the individually clicked result.
@@ -93,6 +68,7 @@ if (Meteor.isServer){
 			})
 		},
 
+        // I want to make this show/hide based on a single row. TODO.
 		'editOne': function(rowID) {
 			console.log('need to edit this one')
 			// Todo: function that allows editing the current result. 

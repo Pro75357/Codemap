@@ -13,58 +13,25 @@ var authroot = 'https://utslogin.nlm.nih.gov'; // Root URL of the auth api
 
  // init variable for TGT
 var TGT = 'init'
+if (thisApiKey == "API-KEY-GOES-HERE") {
+	Meteor.call('noApiKey')
+}
+
+
+if (Meteor.isClient) {
+	Meteor.methods({
+		'noApiKey': function(){
+			Bert.alert('NO API KEY FOUND','danger', 'growl-top-right')
+		}
+	})
+}
 
 
 if (Meteor.isServer) {
 		
 	Meteor.methods({
-	
-		// test if there is a valid TGT		 // this is not worth the effort. Just get a new TGT each session. 
-        /*
-			'testTGT': function() {
-                if (TGTc.find({}).count() < 1) {  // First make sure TGT collection is not empty
-                    console.log('No local TGT found... ');
-                    Meteor.call('getTGT') //just get TGT and move on ( no need to otherwise test new TGT)
-                } else {
-                    console.log('found old TGT: ' + TGT)
-                    Meteor.call('ticketTest') // if key seems legit, just test it. 
-                }
-			},
-		
-			'ticketTest': function(){
-				this.unblock();
-				console.log("Testing TGT...");
-                try {
-                    this.call = HTTP.call(
-                        "POST",
-                        'http://utslogin.nlm.nih.gov/cas/serviceValidate',
-                        {
-                            params:
-                            {
-                                ticket:
-                                Meteor.call('getTicket')
-                                //HTTP.call("POST", TGT, { params: { service: 'http://umlsks.nlm.nih.gov' } })
-                                , service: 'http://umlsks.nlm.nih.gov'
-                            }
-                        });
-                    //console.log(this.call);
-					if (this.call.statuscode < 400){
-						console.log("ticket test response code: "+this.call.statuscode)
-						return true;
-					}
-					else {
-						console.log("ticket test failed");
-						return false;
-						}
-				} catch (e) {
-					console.log(e);
-					return false;
-					}
-				},
-		*/
+			// Gets the initial Ticket Granting Ticket using the API key
 			'getTGT': function (){
-				//this.unblock(); // make sure server doesn't get block from this call ??
-				//console.log('getting TGT...')
 				console.log('TGT apiKey: '+thisApiKey); //print API key=
 				try{
 					this.call = HTTP.call("POST", authroot+'/cas/v1/api-key', {params: { apikey: thisApiKey }} );
@@ -81,7 +48,6 @@ if (Meteor.isServer) {
 			
 			//Get one-time ticket using TGT
 			'getTicket': function(){
-				//this.unblock; // no idea
 				//console.log('getting new single ticket')
 				//console.log('Using TGT: '+TGT);
 				try{
@@ -97,21 +63,9 @@ if (Meteor.isServer) {
 		
         })
 
+		// These functions will just run on startup (on the server). 
+
         Meteor.call('getTGT'); // Get TGT for the session. Good for like 8 hours. On production will need better solution. 
 		//Meteor.call('ticketTest');
 		console.log('Ready to Search!')
 }
-	
-
-
-	
-	//function getTicket() {
-	//	try HTTP.call(POST, root+'', {params: {}})
-//	}
-//Check if TGT valid
-// -Test one-time ticket
-// -- if yes, return true
-// -- if no, do GET TGT
-
-// Test one-time ticket
-// -- just returns T/F
