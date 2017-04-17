@@ -10,7 +10,7 @@
 			{{> buttons}}
       {{> export}}
 		</div>
-		<div class="container">
+		<div class="container-fluid">
   		<hr/>
   		{{> bigtable}}
 		</div>
@@ -21,8 +21,7 @@
 
 <template name='upload'>
   <div class="container">
-    <h4>Upload 2-column CSV with rows:  "Source_Code" and "Source_Desc"</h4>
-    
+    <h4>Step 1: Upload 2-column CSV with row headers:  "Source_Code" and "Source_Desc"</h4>
     {{#unless uploading}}
       <form class='upload' method="POST" enctype='multipart/form-data'>
         <input type='file' name="uploadCSV">
@@ -52,19 +51,59 @@ For future use
 	  <table class="table table-hover">
     <thead>
       <tr>
-        <th>Source Code</th>
-        <th>Source Desc</th>
-        <th>Target Code</th>
+        <th>
+            <button class='btn allCodeSearch'>Search All Codes </button><br />
+          Source Code
+        </th>
+        <th>
+            <button class='btn allDescSearch'> Search All Descriptions </button><br />
+          Source Desc
+        </th>
+        <th>Target Code<br />
+            <select id='searchTarget'>
+                <option selected value="SNOMEDCT_US">US SNOMEDCT</option>
+                <option value="ICD10">ICD-10</option>
+                <option value="ICD9">ICD-9</option>
+                <option value="LNC">LOINC</option>
+                <option value="RXNORM">RxNorm</option>
+                <option value="CPT">CPT</option>
+            </select>
+        </th>
         <th>Target Desc</th>
+        <th>--</th>      
+        <th class='bg-info'>Search Results
+            <button class='btn btn-warning saveallbutton float-right'>Save ALL?</button>
+          </th>
+   
       </tr>
     </thead>
     <tbody>
 	    {{#each codes}}
 	      <tr class = 'coderow'>
-	        <td class="col-sm-1">{{Source_Code}}</td>
-	        <td class="col-sm-1">{{Source_Desc}}</td>
-	        <td class="col-sm-1">{{Target_Code}}</td>
-	        <td class="col-sm-1">{{Target_Desc}}</td>
+	        <td class="col-12">{{Source_Code}}</td>
+	        <td class="col-12 col-md-auto">{{Source_Desc}}</td>
+	        <td class="col-12">{{Target_Code}}</td>
+	        <td class="col-12 col-md-auto">{{Target_Desc}}</td>
+          <td class='col float-right'>
+            <div class='btn-group'>              
+              <button class='btn btn-warning removeButton'>X</button>
+            </div>
+          </td>  
+          <td class="col-12 bg-info">
+            <select class="resultSelector" id="{{_id}}resultSelect" style="width: 600px">
+            {{#each results}}
+              <option value = '{{ui}}'>{{ui}}: {{name}}</option>
+            {{/each}}
+            </select>
+              <button class="btn btn-primary saveButton">Save</button>
+              <br />
+                <form class="searchBox">
+                    <input id="{{_id}}search" type="text" value="{{Source_Desc}}">
+                    <input type="submit" value="Go">
+                    <p>{{SelectedID}}: {{Concept_Code}}</p>
+                </form> 
+             
+          </td>
 	      </tr>
 		{{/each}}
     </tbody>
@@ -74,21 +113,6 @@ For future use
   
   <template name = "buttons">
     <div class='row'>
-      <div class="col-md-8">
-        <form class='UMLS-button'>
-          <label>Select Code Target:</label>
-          <select name='UMLSTarget'>
-           <option selected value=''>All Sources</option>
-              <option value="SNOMEDCT_US">US SNOMEDCT</option>
-              <option value="ICD10">ICD-10</option>
-              <option value="ICD9">ICD-9</option>
-              <option value="LNC">LOINC</option>
-              <option value="RXNORM">RxNorm</option>
-              <option value="CPT">CPT</option>
-          </select>
-        	<input type="submit" class="btn btn-primary" value="Search UMLS"/>   
-        </form>
-      </div>
       <div class="pull-right">
         <form class='ResetDB-button'>
           <input type="submit" class="btn btn-warning" value="Reset DB"/>
