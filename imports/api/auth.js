@@ -1,54 +1,53 @@
-// get APIkey from the apikey.js file  (note, this is excluded from GIT, get your own key licence and key from:https://uts.nlm.nih.gov//home.html) 
+// This will use an imported API key from UMLS UTS 
+// and manage authentication for the API
 
+// UMLS query params: https://documentation.uts.nlm.nih.gov/rest/search/index.html#query-parameters
+// Meteor http calls: https://docs.meteor.com/api/http.html
 
+// get APIkey from the apikey.js file  (note, this is excluded from GIT, get your own key licence and key from:https://uts.nlm.nih.gov//home.html)
 import { myApiKey } from '../../apikey.js'; // this should just give the variable "myApiKey", of which the API key is stored as a string.  
-import { Results } from './results.js'
-import { Codes } from './codes.js'
-var thisApiKey = myApiKey();
+var thisApiKey = myApiKey()
 
-//import './results.js'
-
+//Root URLs for easier coding
 var authroot = 'https://utslogin.nlm.nih.gov'; // Root URL of the auth api
-var restroot = 'https://uts-ws.nlm.nih.gov/rest'; // root URL of the REST api -- https://documentation.uts.nlm.nih.gov/rest/home.html
-// Query params: https://documentation.uts.nlm.nih.gov/rest/search/index.html#query-parameters
-//  Stuff for server
 
-var TGT = 'asdf' // invalid init value for TGT
-
-//https://docs.meteor.com/api/http.html
+ // init variable for TGT
+var TGT = 'init'
 
 
-	if (Meteor.isServer) {
+if (Meteor.isServer) {
 		
-		Meteor.methods({
+	Meteor.methods({
 	
-		//First, test if there is a valid TGT		
-			/*	
-			testTGT: function() {
-				if (TGT.length < 5){  // First make sure is not null variable
-					console.log('tgt not > 5 chars... ');
-					if (needsTested){   // check if we have already tested
-						console.log('needsTested flag is true...')
-						if(Meteor.call('ticketTest')){
-							console.log('test successful, setting needsTested to false.');
-							needsTested= false; // say we have already tested
-							return true; 
-						}	
-					} else { console.log('needsTested is false. TGT is: '+TGT); return true;}
-				}else { console.log('TGT is' +TGT.length+', assuming it is good');return true;} // if TGT length is > 1 we don't even test. for now. 
-				if(Meteor.call('getTGT')){  // if either if statement fails try to get a new TGT.
-					return true; // if getTGT is successful return true.
-				}  
-				else {return false; // if getTGT fails return false
-				}
+		// test if there is a valid TGT		 // this is not worth the effort. Just get a new TGT each session. 
+        /*
+			'testTGT': function() {
+                if (TGTc.find({}).count() < 1) {  // First make sure TGT collection is not empty
+                    console.log('No local TGT found... ');
+                    Meteor.call('getTGT') //just get TGT and move on ( no need to otherwise test new TGT)
+                } else {
+                    console.log('found old TGT: ' + TGT)
+                    Meteor.call('ticketTest') // if key seems legit, just test it. 
+                }
 			},
-		*/
-			ticketTest: function(){
+		
+			'ticketTest': function(){
 				this.unblock();
-				console.log("Testing ticket...");
-				try{
-					this.call = HTTP.call("POST", 'http://utslogin.nlm.nih.gov/cas/serviceValidate', {params: { ticket: HTTP.call("POST", TGT, {params: {service: 'http://umlsks.nlm.nih.gov'}}), service: 'http://umlsks.nlm.nih.gov'}});
-					console.log(this.call);
+				console.log("Testing TGT...");
+                try {
+                    this.call = HTTP.call(
+                        "POST",
+                        'http://utslogin.nlm.nih.gov/cas/serviceValidate',
+                        {
+                            params:
+                            {
+                                ticket:
+                                Meteor.call('getTicket')
+                                //HTTP.call("POST", TGT, { params: { service: 'http://umlsks.nlm.nih.gov' } })
+                                , service: 'http://umlsks.nlm.nih.gov'
+                            }
+                        });
+                    //console.log(this.call);
 					if (this.call.statuscode < 400){
 						console.log("ticket test response code: "+this.call.statuscode)
 						return true;
@@ -62,17 +61,17 @@ var TGT = 'asdf' // invalid init value for TGT
 					return false;
 					}
 				},
-		
-			getTGT: function (){
-				this.unblock(); // make sure server doesn't get block from this call ??
-				console.log('getting TGT...')
-				console.log('Using ApiKey: '+thisApiKey); //print API key=
+		*/
+			'getTGT': function (){
+				//this.unblock(); // make sure server doesn't get block from this call ??
+				//console.log('getting TGT...')
+				console.log('TGT apiKey: '+thisApiKey); //print API key=
 				try{
 					this.call = HTTP.call("POST", authroot+'/cas/v1/api-key', {params: { apikey: thisApiKey }} );
 					console.log('TGT get status: '+ this.call.statusCode);
 					//console.log(this.call.headers);
 					TGT = this.call.headers.location; // Store in TGT after parsing json
-					console.log("newTGT: "+TGT); // Print the parsing
+                    console.log("newTGT: " + TGT); // Print the parsing  
 					return true;
 				} catch (e) {
 					console.log(e);
@@ -81,9 +80,9 @@ var TGT = 'asdf' // invalid init value for TGT
 			},
 			
 			//Get one-time ticket using TGT
-			getTicket: function(){
-				this.unblock; // no idea
-				console.log('getting new single ticket')
+			'getTicket': function(){
+				//this.unblock; // no idea
+				//console.log('getting new single ticket')
 				//console.log('Using TGT: '+TGT);
 				try{
 					this.call = HTTP.call("POST", TGT, {params: {service: 'http://umlsks.nlm.nih.gov'}});
@@ -95,69 +94,13 @@ var TGT = 'asdf' // invalid init value for TGT
 					return false;
 				}
 			},
-			
-			searchApi: function(searchText, searchTarget){
-				this.unblock;
-				try{
-					var call = 	HTTP.call(
-							"GET", 
-							restroot+'/search/current', 
-							{params: {ticket: Meteor.call('getTicket'), 
-										string: searchText,
-										sabs: searchTarget,  //SNOMED_CT codes only
-										searchType: 'words' //default is 'words'
-										}
-							},							
-							//function (err, res) {
-								//Remove the only result
-								//Meteor.call('results.remove')
-	
-								//Put in a new result
-							//	console.log('result objects: '+res.data.result.results[0])
-								//console.log('CUI: '+res.data.result.results[0].ui)
-								//return JSON.parse(res.data.result.results)  //Returns first result object
-								//}
-							)
-						return call.data.result.results // returns result object
-				} catch(e) {
-					console.log(e);
-					return false;
-				}
-			},
-			
-			UMLSFetch: function(searchTarget){
-				this.unblock
-				var code = Codes.find({},{limit: 10}).fetch()
-				console.log('Fetch Search Target: '+searchTarget)
-				for (x in code) {
-					//console.log(code[x].Clarity_HX_Description)
-					var result = Meteor.call('searchApi', code[x].Clarity_HX_Description, searchTarget)
-					//console.log(result)
-					//console.log('CUI in updatefx: '+result.ui)
-					//console.log(code[x]._id)
-					Codes.update({
-						_id: code[x]._id
-						},{
-							$set: {CUI: result[0].ui } //returns CUI of first result.
-					})
-					Codes.update({
-						_id: code[x]._id
-					},{
-						$set: {name: result[0].name} // returns name of first result
-					})
-				}
-			},
+		
+        })
 
-			resetDB: function() {
-				Codes.update({},{$set: {CUI: ''}}, {multi: true})
-				Codes.update({},{$set: {name: ''}}, {multi: true})
-			}
-			
-		})
-		Meteor.call('getTGT');
+        Meteor.call('getTGT'); // Get TGT for the session. Good for like 8 hours. On production will need better solution. 
 		//Meteor.call('ticketTest');
 		console.log('Ready to Search!')
-	}
+}
 	
 
 
@@ -172,4 +115,3 @@ var TGT = 'asdf' // invalid init value for TGT
 
 // Test one-time ticket
 // -- just returns T/F
-
