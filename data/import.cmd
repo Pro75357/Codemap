@@ -1,1 +1,0 @@
-cmd /k "c:\Program Files\MongoDB\Server\3.4\bin\mongoimport" -h localhost:3001 --db meteor --collection codes --type json --file clarityHX.json --jsonArray
