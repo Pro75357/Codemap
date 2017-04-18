@@ -53,7 +53,7 @@ if (Meteor.isServer) {
 				try{
 					this.call = HTTP.call("POST", TGT, {params: {service: 'http://umlsks.nlm.nih.gov'}});
 					var ticket = this.call.content;
-					console.log('New single-use ticket: '+ticket);
+					//console.log('New single-use ticket: '+ticket);
 					return ticket;
 				} catch (e) {
 					console.log(e);

@@ -9,24 +9,6 @@ import { Results } from '../api/results.js'
 import { Codes } from '../api/codes.js'
 import { CodeSystems } from '../api/codeSystems.js'
 
-//Listener for form .PressureInput
-Template.searchBox.events({
-  'submit form'(event) {
-    // Prevent default browser form submit
-    event.preventDefault();
-    
-    //Just see if hitting submit does anything
-    console.log('search submitted');
-    const target = event.target
-    const searchText = target.text.value
-    // call get ticket
-    const results= Meteor.call('searchApi', searchText); //Searches
-    
-    console.log(results);
-    //Meteor.call('results.insert', results); //stores in mongo for display later
-  },
-});
-
 Template.buttons.events({
 
 	'submit .ResetDB-button' (event) {
@@ -85,12 +67,18 @@ Template.bigtable.helpers({
 		return res.result
     },
 
-    SelectedID() {
-        return document.getElementById('searchTarget').value
+    codesystems () {
+    	return CodeSystems.find({}).fetch()
     },
 
-    codesystems () {
-    	return CodeSystems.find({ rowID: this._id }).fetch()
+    resultcodes() {
+        //var searchCUI = 'C0007876'
+        //var searchCUI = document.getElementById(this._id+'resultSelect').value
+       // console.log(searchCUI)
+        var res = Results.find({ rowID: this._id, purpose: 'CodesSearch' }, {fields: { codeSet: 1, code: 1 } }).fetch()
+
+        console.dir(res)
+        return  res
     }
 
 })
@@ -98,15 +86,15 @@ Template.bigtable.helpers({
 Template.bigtable.events({
     'click .allCodeSearch': function (event, template) {
         // call umls fetch with words and normal matches
-       var searchTarget = document.getElementById('searchTarget').value
+      // var searchTarget = document.getElementById('searchTarget').value
        Meteor.call('codesFetch', searchTarget)
         // send search target along to update selectors. 
     },
 
     'click .allDescSearch': function (event, template) {
         // call UMLS fetch with codes and exact matches
-        var searchTarget = document.getElementById('searchTarget').value
-        Meteor.call('descFetch', searchTarget) 
+       // var searchTarget = document.getElementById('searchTarget').value
+        Meteor.call('descFetch') 
 
     },
 
@@ -138,10 +126,10 @@ Template.bigtable.events({
 		event.preventDefault
 		//console.log('clicked saveButton')
         var rowID = this._id
-        var selectID = document.getElementById(this._id+'resultSelect').value
+        var searchCUI = document.getElementById(this._id+'resultSelect').value
         var searchTarget = document.getElementById('searchTarget').value
        // console.log(selectID)
-        Meteor.call('saveOne', rowID, selectID, searchTarget)
+        Meteor.call('saveOne', rowID, searchCUI, searchTarget)
         
     },
 
@@ -163,9 +151,10 @@ Template.bigtable.events({
     'change .resultSelector': function (event, template) {
         event.preventDefault
         var rowID = this._id
-        var selectID = document.getElementById(this._id + 'resultSelect').value
+        var searchCUI = document.getElementById(this._id + 'resultSelect').value
        //var searchTarget = document.getElementById('searchTarget').value
         //console.log('changed')
-        Meteor.call('getConceptCodes', rowID, selectID)
+        Meteor.call('clearTempCodes', rowID)
+        Meteor.call('getConceptCodes', rowID, searchCUI)
     }
 })

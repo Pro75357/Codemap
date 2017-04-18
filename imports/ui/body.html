@@ -42,13 +42,9 @@
 	</ul>
 </template>
 
-<template name='searchBox'>
-For future use
-</template>
-
 <template name="bigtable">
   <div>
-	  <table class="table table-hover table-condensed table-fixed">
+	  <table class="table table-hover table-condensed">
     <thead>
       <tr>
         <th>
@@ -57,11 +53,10 @@ For future use
             Source Codes
         </th>
 
-         {{#each codesystems}}
-           <td>{{codesystem}}</td>
-          {{/each}}
+
+           <td>Matching Codes</td>
           
-        <th>--</th>   
+        <th>del</th>  
         <th> Search Stuff </th>     
       </tr>
     </thead>
@@ -69,9 +64,7 @@ For future use
 	    {{#each codes}}
 	      <tr class = 'coderow'>
 	        <td class="col-12">{{Source_Code}}: {{Source_Desc}}</td>
-          {{#each codesystems}}
-          <td> {{../ICD10PCS}} </td>
-          {{/each}}
+          <td>Matching Codes</td>
           <td class='col float-right'>
             <div class='btn-group'>              
               <button class='btn btn-warning removeButton'>X</button>
@@ -87,10 +80,11 @@ For future use
                   <form class="searchBox">
                     <input id="{{_id}}search" type="text" value="{{Source_Desc}}">
                     <input type="submit" value="Go">
-                    <p>{{#each codesystems}} {{codesystem}}:CODE {{/each}}</p>
                 </form> 
               <br />
-
+              {{#each resultcodes}}
+               {{codeSet}}: {{code}}
+              {{/each}}
              
           </td>
 	      </tr>
