@@ -7,6 +7,7 @@ import '../api/export.js'
 import '../api/tableEdit.js'  // perhaps not necessary as all server?
 import { Results } from '../api/results.js'
 import { Codes } from '../api/codes.js'
+import { CodeSystems } from '../api/codeSystems.js'
 
 //Listener for form .PressureInput
 Template.searchBox.events({
@@ -88,6 +89,10 @@ Template.bigtable.helpers({
         return document.getElementById('searchTarget').value
     },
 
+    codesystems () {
+    	return CodeSystems.find({ rowID: this._id }).fetch()
+    }
+
 })
 
 Template.bigtable.events({
@@ -109,7 +114,7 @@ Template.bigtable.events({
 		event.preventDefault
         var rowID = this._id
         //var selectID = document.getElementById('').value
-        var searchTarget = document.getElementById('searchTarget').value
+       // var searchTarget = document.getElementById('searchTarget').value
 		//console.log('row id: '+rowID)
 		//console.log(Codes.find({_id: rowID}).fetch())
        // Meteor.call('saveOne',rowID, selectID, searchTarget)
@@ -159,8 +164,8 @@ Template.bigtable.events({
         event.preventDefault
         var rowID = this._id
         var selectID = document.getElementById(this._id + 'resultSelect').value
-        var searchTarget = document.getElementById('searchTarget').value
+       //var searchTarget = document.getElementById('searchTarget').value
         //console.log('changed')
-        Meteor.call('getConceptCodes', rowID, selectID, searchTarget)
+        Meteor.call('getConceptCodes', rowID, selectID)
     }
 })

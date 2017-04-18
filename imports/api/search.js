@@ -3,6 +3,12 @@
 import './auth.js'
 import { Codes } from './codes.js'
 import { Results } from './results.js'
+import {CodeSystems} from './codeSystems.js'
+//const codeSystems = require('./config.json')
+
+import { Mongo } from 'meteor/mongo'
+
+export var Temp = new Mongo.Collection(null);
 
 var restroot = 'https://uts-ws.nlm.nih.gov/rest'; // root URL of the REST api -- https://documentation.uts.nlm.nih.gov/rest/home.html
 // Query params: https://documentation.uts.nlm.nih.gov/rest/search/index.html#query-parameters
@@ -14,7 +20,7 @@ if (Meteor.isServer) {
         //Second-level search - retruns 'atoms' for a Concept Unique Identifier (CUI)
         // CUI is the main code returned from searchApi method
 
-        'searchCUI': function (searchCUI, searchTarget) {
+        'searchCUI': function (searchCUI) {
             console.log("searching: "+searchCUI)
             try {
                 var call = HTTP.call(
@@ -23,7 +29,7 @@ if (Meteor.isServer) {
                     {
                         params: {
                             ticket: Meteor.call('getTicket'),
-                            sabs: searchTarget,  //selected codeset
+                          //  sabs: 'ICD10PCS,ICD9CM,SNOMEDCT,ICD10CM,RXNORM,LOINC,SOP'  //selected codeset
                         }
                     },
                 )
@@ -68,23 +74,34 @@ if (Meteor.isServer) {
 		},
 
         // This gets the actual codes for the selected searchTarget and puts it into the Codes collection where it will pull into the view.
-        'getConceptCodes': function (rowID, selectID, searchTarget) {
-            res = Meteor.call('searchCUI', selectID, searchTarget)
+        'getConceptCodes': function (rowID, selectID) {
+            res = Meteor.call('searchCUI', selectID)
             //console.dir(res)
             // if no result just return no results instead of error on the next line
             if (typeof res[0] === 'undefined') {
                 TC = 'NONE'
             } else {
-                TCurl = res[0].code // The first resulted code. Is a whole https url.
-                TCsplit = TCurl.split("/") // split the URL by / 
-                TC = TCsplit[(TCsplit.length - 1)] // - we only want the last bit
+               // console.dir(res)
+                Temp.insert(res)
+                CS = CodeSystems.find({}).fetch()
+              //  console.log(typeof CS)
+                for (x in CS){
+                    console.dir(CS[x].codesystem)
+                   // console.log(Temp.find({}).fetch())
+                    tempcodes = Temp.find({rootSource: CS[x].codesystem}).fetch()
+                console.log(tempcodes)
+                    //TCurl = tempcodes[0].code // The first resulted code. Is a whole https url.
+                  //  TCsplit = TCurl.split("/") // split the URL by / 
+                  //  TC = TCsplit[(TCsplit.length - 1)] // - we only want the last bit
+                  //  console.log(TC)
+                }
             }
             // Update the table with the result
-            Codes.update(
+            CodeSystems.update(
                 { _id: rowID },
                 {
                     $set: {
-                        Concept_Code: TC,
+                        Concept_Code: 'xx',
                     }
                 }
             )
@@ -94,6 +111,7 @@ if (Meteor.isServer) {
         'searchAgain': function (rowID, searchText, searchTarget) {
             //Results.remove({rowID: [rowID]}) // removes the original results
             Meteor.call('searchApi', searchText, 'words', searchTarget, rowID)
+            console.dir(codeSystems)
         },
 
 		// This is the method that searches the UMLS database against every imported "Source_Desc". Is the MAIN batch function. 
