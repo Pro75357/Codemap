@@ -4,7 +4,6 @@ import '../api/auth.js'
 import '../api/search.js'
 import '../api/upload.js'
 import '../api/export.js'
-import '../api/tableEdit.js'  // perhaps not necessary as all server?
 import { Results } from '../api/results.js'
 import { Codes } from '../api/codes.js'
 import { CodeSystems } from '../api/codeSystems.js'
@@ -22,20 +21,13 @@ Template.buttons.events({
 		console.log('Magic!');  // this is just for testing method calls
 	}
 })
-/*
+
 Template.body.helpers({
-		resultsCount() {
-		return Results.find().count()
-	},
-	resultsPresent() {
-		if (Results.find().count() > 0){
-			return true;
-		} else {
-			return false;
-		};
-	},
+    codesystems() {
+        return CodeSystems.find({}).fetch()
+    },
 })
-*/
+
 Template.resultsdisplay.helpers({
 	results() {
 		//return Meteor.call('results.find');
@@ -57,6 +49,9 @@ Template.bigtable.helpers({
 		 )
     },
 
+    cuis() {
+        return Codes.find({ _id: this._id }, { fields: { searchCUIs: 1 } })
+    },
 	results(){
         var res = Results.find({ rowID: this._id }, { sort: { createdAt: -1 } }).fetch()[0] //finds most recent result for the row.
 		//console.dir(res)
@@ -77,7 +72,7 @@ Template.bigtable.helpers({
        // console.log(searchCUI)
         var res = Results.find({ rowID: this._id, purpose: 'CodesSearch' }, {fields: { codeSet: 1, code: 1 } }).fetch()
 
-        console.dir(res)
+       // console.dir(res)
         return  res
     }
 
@@ -109,12 +104,6 @@ Template.bigtable.events({
         //console.dir(res)
 	},
 
-	'click .saveallbutton': function(event, template){
-		event.preventDefault
-		console.log('clicked saveallbutton')
-		Meteor.call('saveAll')
-	},
-
 	'click .removeButton': function(event, template){
 		event.preventDefault
 		console.log('clicked removeButton')
@@ -127,9 +116,7 @@ Template.bigtable.events({
 		//console.log('clicked saveButton')
         var rowID = this._id
         var searchCUI = document.getElementById(this._id+'resultSelect').value
-        var searchTarget = document.getElementById('searchTarget').value
-       // console.log(selectID)
-        Meteor.call('saveOne', rowID, searchCUI, searchTarget)
+        Meteor.call('saveOne', rowID, searchCUI)
         
     },
 
@@ -137,10 +124,9 @@ Template.bigtable.events({
         event.preventDefault
         var rowID = this._id
         var searchText = document.getElementById(this._id + 'search').value
-
-        var searchTarget = document.getElementById('searchTarget').value
-
-        Meteor.call('searchAgain', rowID, searchText, searchTarget)
+        //var searchTarget = document.getElementById('searchTarget').value
+        Meteor.call('clearTempCodes', rowID)
+        Meteor.call('searchAgain', rowID, searchText)
         //document.getElementById(this.ID+'search').selectedIndex = '0' // set the search selector back to first result. -- problem is, it does a full page refresh!
         //var selectID = document.getElementById(this._id + 'resultSelect').value
        // var searchTarget = document.getElementById('searchTarget').value

@@ -3,7 +3,9 @@
 import './auth.js'
 import { Codes } from './codes.js'
 import { Results } from './results.js'
-import {CodeSystems} from './codeSystems.js'
+import { CodeSystems } from './codeSystems.js'
+import { Saved } from './saved.js'
+
 //const codeSystems = require('./config.json')
 
 //import { Mongo } from 'meteor/mongo'
@@ -77,7 +79,7 @@ if (Meteor.isServer) {
                             codeUrl = res.data.result[0].code // The first resulted code. Is a whole https url.
                             codeSplit = codeUrl.split("/") // split the URL by / 
                             code = codeSplit[(codeSplit.length - 1)] // - we only want the last bit
-                            console.log('found: ' + searchTarget + ": " + code)
+                          //  console.log('found: ' + searchTarget + ": " + code)
                             Results.insert({ rowID: rowID, purpose: 'CodesSearch', codeSet: searchTarget, code: code })
                         }
                     }
@@ -132,10 +134,10 @@ if (Meteor.isServer) {
         },
 
         //Search that is called from the single search box
-        'searchAgain': function (rowID, searchText, searchTarget) {
+        'searchAgain': function (rowID, searchText) {
             //Results.remove({rowID: [rowID]}) // removes the original results
-            Meteor.call('searchApi', searchText, 'words', searchTarget, rowID)
-            console.dir(codeSystems)
+            Meteor.call('searchApi', searchText, 'words', rowID)
+           // console.dir(codeSystems)
         },
 
         // This is the method that searches the UMLS database against every imported "Source_Desc". Is the MAIN batch function. 
@@ -163,6 +165,31 @@ if (Meteor.isServer) {
 
         'clearTempCodes': function (rowID) {
             Results.remove({ rowID: rowID, purpose: 'CodesSearch' }) // clear any previous results on this row before calling new results
-        }
+        },
+
+        // This saves a single selected (selectID) result to the Codes table in the Target fields.
+        'saveOne': function (rowID, searchCUI) {
+            // Pull the codes from results
+            var codes = Results.find({ rowID: rowID, purpose: 'CodesSearch' }, { fields: { codeSet: 1, code: 1, _id: 0 } }).fetch()
+            // Cui is already given through argument!
+            // get Source_Code, Source_Desc from Codes
+            Source = Codes.findOne({_id: rowID}, {fields: {Source_Code: 1, Source_Desc: 1}})
+            // for each code, everything (Source Code, Source Desc, CUI, Code) to Saved (this is for papa parse and easy exporting)
+            for (x in codes) {
+               // console.log(codes[x].codeSet+codes[x].code)
+                Saved.insert({ rowID: rowID, Source_Code: Source.Source_Code, Source_Desc: Source.Source_Desc, searchCUI: searchCUI, codeSet: codes[x].codeSet, code: codes[x].code })
+            }
+            
+            // push  CUI to "Saved CUIs" array in codes to update main table         
+            Codes.update({ _id: rowID }, { $push: { searchCUIs: searchCUI } })
+        },
+                // This removes a result from the target fields based on the row. 
+		'removeOne': function (rowID) {
+            console.log('results deleted')
+            Saved.remove({ rowID: rowID }) // removes any saved codes from the row
+            Codes.update({ _id: rowID }, { $set: { searchCUIs: [] } }) // removes searchCUIs from the view
+        },
+
+
 	})
 }

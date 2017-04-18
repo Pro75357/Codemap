@@ -3,6 +3,7 @@
 
 import { Mongo } from 'meteor/mongo'
 import { Results } from './results.js'
+import { Saved } from './saved.js'
 export const Codes = new Mongo.Collection('codes');
 
 if (Meteor.isClient) {
@@ -19,6 +20,7 @@ if (Meteor.isServer) {
 		'resetDB': function() { // drop everything
             Codes.rawCollection().drop()
             Results.rawCollection().drop()
+            Saved.rawCollection().drop()
 
 			Codes.insert({Source_Code: 'None'}) // Add in a simple structure and some info as a placeholder
 			Codes.update({}, {$set: {Source_Desc: 'No data: Please upload CSV'}})
@@ -31,7 +33,8 @@ if (Meteor.isServer) {
 		// just clears the collections, does not add anything.
 		'clearDB': function() { 
 			Codes.rawCollection().drop()
-			Results.rawCollection().drop()
+            Results.rawCollection().drop()
+            Saved.rawCollection().drop()
 		}
 			//Codes.update({},{$set: {CUI: ''}}, {multi: true})
 			//Codes.update({},{$set: {name: ''}}, {multi: true})

@@ -1,6 +1,6 @@
 // This file contains methods that handle the file export.
 
-import { Codes } from './codes.js'
+import { Saved } from './saved.js'
 
 if (Meteor.isClient) { // export itself is handled in the client
   Template.export.events({
@@ -29,20 +29,9 @@ if (Meteor.isClient) { // export itself is handled in the client
 
 if (Meteor.isServer) {
   Meteor.methods({
-
     // get the data that will be used to make the Export CSV
-    exportData: function(){
-      
-    data = Codes.find({}, // find everything (all rows)
-        {fields: {  
-          '_id':0, // Do not return _ID field
-          'Source_Code':1, // DO return these fields that we want in our csv
-          'Source_Desc':1,
-          'Target_Code':1,
-          'Target_Desc':1
-          }
-        }
-       ).fetch() // format this as a data object
+    'exportData': function(){
+        data = Saved.find({}, { fields: { _id: 0, rowID: 0 } }).fetch()
     //console.dir('exported data: '+data)
     return data
     }

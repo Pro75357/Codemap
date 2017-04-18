@@ -38,7 +38,7 @@ if (Meteor.isServer) {
 					console.log('TGT get status: '+ this.call.statusCode);
 					//console.log(this.call.headers);
 					TGT = this.call.headers.location; // Store in TGT after parsing json
-                    console.log("newTGT: " + TGT); // Print the parsing  
+                    //console.log("newTGT: " + TGT); // Print the parsing  
 					return true;
 				} catch (e) {
 					console.log(e);

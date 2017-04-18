@@ -2,6 +2,7 @@
 	<div class="page-header container" style="background: lightgrey">
 		  <h1>Codemap</h1>
 			<p>User: {{> loginButtons}}</p>
+        <p> using codeSystems: {{#each codesystems}}{{codesystem}}, {{/each}}</p>
   </div>
 	{{#if currentUser}}
 		<div class="container">
@@ -49,12 +50,12 @@
       <tr>
         <th>
             <button class='btn allCodeSearch'>Search All Codes </button>
-            <button class='btn allDescSearch'> Search All Descriptions </button><br />
+            <button class='btn allDescSearch btn-primary'> Search All Descriptions </button><br />
             Source Codes
         </th>
 
 
-           <td>Matching Codes</td>
+           <td>Saved Codes</td>
           
         <th>del</th>  
         <th> Search Stuff </th>     
@@ -64,7 +65,9 @@
 	    {{#each codes}}
 	      <tr class = 'coderow'>
 	        <td class="col-12">{{Source_Code}}: {{Source_Desc}}</td>
-          <td>Matching Codes</td>
+          <td>{{#each cuis}}
+                    {{searchCUIs}}
+                {{/each}}</td>
           <td class='col float-right'>
             <div class='btn-group'>              
               <button class='btn btn-warning removeButton'>X</button>
@@ -83,7 +86,7 @@
                 </form> 
               <br />
               {{#each resultcodes}}
-               {{codeSet}}: {{code}}
+               {{codeSet}}: {{code}},
               {{/each}}
              
           </td>
