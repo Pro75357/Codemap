@@ -125,8 +125,10 @@ Template.bigtable.events({
         var rowID = this._id
         var searchText = document.getElementById(this._id + 'search').value
         //var searchTarget = document.getElementById('searchTarget').value
+        document.getElementById(this._id + 'resultSelect').selectedIndex = 0 // set the selector back to first result so the next 'getconcepts' call returns the correct data. 
         Meteor.call('clearTempCodes', rowID)
         Meteor.call('searchAgain', rowID, searchText)
+
         //document.getElementById(this.ID+'search').selectedIndex = '0' // set the search selector back to first result. -- problem is, it does a full page refresh!
         //var selectID = document.getElementById(this._id + 'resultSelect').value
        // var searchTarget = document.getElementById('searchTarget').value
