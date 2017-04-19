@@ -1,7 +1,12 @@
+// This is where the methods that handle the file upload live.
+
 import { Codes } from './codes.js'
 
-codesColumns = []
+//codesColumns = []
+
 if (Meteor.isClient) {
+
+	// Helper for the loading icon
 	Template.upload.onCreated( () => {
 		Template.instance().uploading = new ReactiveVar( false )
 	})
@@ -23,47 +28,38 @@ if (Meteor.isClient) {
 
 			Meteor.call('clearDB') //Drops any existing database
 
-			Papa.parse( event.target.files[0], {
+			Papa.parse( event.target.files[0], { // parses the uploaded CSV to a data structure
 				header: true,
 				complete (results, file){
-					Meteor.call( 'parseUpload', results.data, (error, response ) => {
+					Meteor.call( 'parseUpload', results.data, (error, response ) => { // passes the data to the server function to save it to collection
 						if (error) {
 							console.log('warning:'+error.reason)
 							Bert.alert( error.reason, 'warning')
 						} else {
-							template.uploading.set( false )
-							console.log("upload complete")
-							Bert.alert('Upload complete!', 'success', 'growl-top-right')
+							template.uploading.set( false ) // stop the uploading icon
+							//console.log("upload complete")
+							Bert.alert('Upload complete!', 'success', 'growl-top-right') // upload complete notification
 						}
 					})
 				}
 			})
-			for (cols in codesColumns) {
-				console.log('new columns: '+cols)
-				}
 		}
 	})
 }
 
 if (Meteor.isServer) {
 	Meteor.methods({
-		parseUpload: function( data ){
+		parseUpload: function( data ){ // takes data that is passed from the parsed CVS above.
 			check( data, Array )
-			codesColumns = [] // clear column names variable
+			
+			//codesColumns = [] // clear column names variable
 			//console.log(data[0])
-			for (let i=0; i< data.length; i++) {
+			for (let i=0; i< data.length; i++) { // Insert each field as a new row.
 				Codes.insert( data[i] )
 				//console.log(data[i])
 			}
-			for (var key in Codes.findOne({})) { // Loads column names in an array
-					//console.log('key: '+key)
-					codesColumns.push(key)
-					console.log(codesColumns)
-				}
-			Codes.update({},{$set: {Target_Code: ''}}, {multi: true}) // Add the empty target columns to all documents
-			Codes.update({},{$set: {Target_Desc: ''}}, {multi: true})
-
+			//Codes.update({},{$set: {Target_Code: ''}}, {multi: true}) // Add the empty target columns to all documents
+			//Codes.update({},{$set: {Target_Desc: ''}}, {multi: true}) // not really necessary
 		},
-		
 	})
 }
