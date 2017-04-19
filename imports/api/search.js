@@ -51,7 +51,7 @@ if (Meteor.isServer) {
         //Second-level search - retruns 'atoms' for a Concept Unique Identifier (CUI)
         // CUI is the main code returned from searchApi method
 
-        'searchCUI': function (searchCUI, searchTarget, rowID) {
+        'searchCUI': function (searchCUI, searchTarget,searchTargetOID,rowID) {
             // console.log("searching: " + searchCUI)
             try {
                 HTTP.call(
@@ -60,7 +60,8 @@ if (Meteor.isServer) {
                     {
                         params: {
                             ticket: Meteor.call('getTicket'),
-                            sabs: searchTarget
+                            sabs: searchTarget,
+                           // ttys: 'PT' // return only "preferred term"
                         }
                     }, function (err, res) {
                         if (err) {
@@ -70,11 +71,12 @@ if (Meteor.isServer) {
                             //console.log(searchTarget)
                             //console.log(res.data.result[0].code)
                             // store first result somewhere with corresponsing target code. 
+                            console.dir(res.data.result)
                             codeUrl = res.data.result[0].code // The first resulted code. Is a whole https url.
                             codeSplit = codeUrl.split("/") // split the URL by / 
                             code = codeSplit[(codeSplit.length - 1)] // - we only want the last bit
                           //  console.log('found: ' + searchTarget + ": " + code)
-                            Results.insert({ rowID: rowID, purpose: 'CodesSearch', searchCUI: searchCUI, codeSet: searchTarget, code: code })
+                            Results.insert({ rowID: rowID, purpose: 'CodesSearch', searchCUI: searchCUI, codeSet: searchTarget, codeSetOID: searchTargetOID, code: code })
                         }
                     }
                 )
@@ -91,7 +93,11 @@ if (Meteor.isServer) {
             CS = CodeSystems.find({}).fetch()
             for (x in CS) {
                 searchTarget = CS[x].codesystem
-                Meteor.call('searchCUI', searchCUI, searchTarget, rowID)
+                searchTargetOID = CS[x].OID
+                console.log(searchTarget)
+                console.log(searchTargetOID)
+                searchTargetOID = CS[x].OID
+                Meteor.call('searchCUI', searchCUI, searchTarget, searchTargetOID, rowID)
             }
         },
 
@@ -140,14 +146,14 @@ if (Meteor.isServer) {
                 //console.log(Cname)
             
                 // Pull the codes & CUI from results
-                var codes = Results.find({ rowID: rowID, purpose: 'CodesSearch' }, { fields: { codeSet: 1, code: 1, _id: 0 } }).fetch()
+                var codes = Results.find({ rowID: rowID, purpose: 'CodesSearch' }, { fields: { codeSetOID: 1, codeSet: 1, code: 1, _id: 0 } }).fetch()
                 // Cui is already given through argument!
                 // get Source_Code, Source_Desc from Codes
                 Source = Codes.findOne({ _id: rowID }, { fields: { Source_Code: 1, Source_Desc: 1 } })
                 // for each code, everything (Source Code, Source Desc, CUI, Code) to Saved (this is for papa parse and easy exporting)
                 for (x in codes) {
                     // console.log(codes[x].codeSet+codes[x].code)
-                    Saved.insert({ rowID: rowID, Source_Code: Source.Source_Code, Source_Desc: Source.Source_Desc, ConceptCode: searchCUI, ConceptName: Cname, codeSet: codes[x].codeSet, codeSetCode: codes[x].code })
+                    Saved.insert({ rowID: rowID, Source_Code: Source.Source_Code, Source_Desc: Source.Source_Desc, ConceptCode: searchCUI, ConceptName: Cname, codeSet: codes[x].codeSet, codeSetOID: codes[x].codeSetOID, codeSetCode: codes[x].code })
                 }
                 // push  CUI to "Saved CUIs" and names to array then to codes to update main table
                 //var cui = [ searchCUI, Cname ]
