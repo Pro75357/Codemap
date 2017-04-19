@@ -6,12 +6,6 @@ import { Results } from './results.js'
 import { CodeSystems } from './codeSystems.js'
 import { Saved } from './saved.js'
 
-//const codeSystems = require('./config.json')
-
-//import { Mongo } from 'meteor/mongo'
-
-//export var Temp = new Mongo.Collection(null);
-
 var restroot = 'https://uts-ws.nlm.nih.gov/rest'; // root URL of the REST api -- https://documentation.uts.nlm.nih.gov/rest/home.html
 // Query params: https://documentation.uts.nlm.nih.gov/rest/search/index.html#query-parameters
 
@@ -40,7 +34,7 @@ if (Meteor.isServer) {
                             console.log('searchApi error: ' + error.statuscode)
                         } else {
                             var result = res.data.result.results
-                            Results.insert({ rowID: rowID, createdAt: new Date(), result })  //write the results using the async function (vs returning a result to some other function which is not async)
+                            Results.insert({ rowID: rowID, purpose: 'resultDisplay', createdAt: new Date(), result })  //write the results using the async function (vs returning a result to some other function which is not async)
                             var searchCUI = result[0].ui //Just get first result in this case (to populate the code under the drop-down)
                             Meteor.call('getConceptCodes', rowID, searchCUI)  // this will get the actual target code (such as SNOMED code) for the selectID to fill populate under each search result.
                         }
@@ -80,7 +74,7 @@ if (Meteor.isServer) {
                             codeSplit = codeUrl.split("/") // split the URL by / 
                             code = codeSplit[(codeSplit.length - 1)] // - we only want the last bit
                           //  console.log('found: ' + searchTarget + ": " + code)
-                            Results.insert({ rowID: rowID, purpose: 'CodesSearch', codeSet: searchTarget, code: code })
+                            Results.insert({ rowID: rowID, purpose: 'CodesSearch', searchCUI: searchCUI, codeSet: searchTarget, code: code })
                         }
                     }
                 )
@@ -99,38 +93,6 @@ if (Meteor.isServer) {
                 searchTarget = CS[x].codesystem
                 Meteor.call('searchCUI', searchCUI, searchTarget, rowID)
             }
-
-            //console.dir(res)
-            // if no result just return no results instead of error on the next line
-            /*
-        if (typeof res[0] === 'undefined') {
-            TC = 'NONE'
-        } else {
-           // console.dir(res)
-            Temp.insert(res)
-            CS = CodeSystems.find({}).fetch()
-          //  console.log(typeof CS)
-            for (x in CS){
-                console.dir(CS[x].codesystem)
-               // console.log(Temp.find({}).fetch())
-                tempcodes = Temp.find({rootSource: CS[x].codesystem}).fetch()
-            console.log(tempcodes)
-                //TCurl = tempcodes[0].code // The first resulted code. Is a whole https url.
-              //  TCsplit = TCurl.split("/") // split the URL by / 
-              //  TC = TCsplit[(TCsplit.length - 1)] // - we only want the last bit
-              //  console.log(TC)
-            }
-            
-        }
-        // Update the table with the result
-        CodeSystems.update(
-            { _id: rowID },
-            {
-                $set: {
-                    Concept_Code: 'xx',
-                }
-            }
-        )*/
         },
 
         //Search that is called from the single search box
@@ -157,7 +119,7 @@ if (Meteor.isServer) {
             Results.rawCollection().drop() // clear previous results. 
             var code = Codes.find({}, { sort: { Source_Code: 1 } }).fetch()
             for (x in code) {
-                console.log('Searching: ' + code[x].Source_Code)
+               // console.log('Searching: ' + code[x].Source_Code)
                 rowID = code[x]._id
                 Meteor.call('searchApi', code[x].Source_Code, 'exact', rowID)
             }
@@ -169,27 +131,35 @@ if (Meteor.isServer) {
 
         // This saves a single selected (selectID) result to the Codes table in the Target fields.
         'saveOne': function (rowID, searchCUI) {
-            // Pull the codes from results
-            var codes = Results.find({ rowID: rowID, purpose: 'CodesSearch' }, { fields: { codeSet: 1, code: 1, _id: 0 } }).fetch()
-            // Cui is already given through argument!
-            // get Source_Code, Source_Desc from Codes
-            Source = Codes.findOne({_id: rowID}, {fields: {Source_Code: 1, Source_Desc: 1}})
-            // for each code, everything (Source Code, Source Desc, CUI, Code) to Saved (this is for papa parse and easy exporting)
-            for (x in codes) {
-               // console.log(codes[x].codeSet+codes[x].code)
-                Saved.insert({ rowID: rowID, Source_Code: Source.Source_Code, Source_Desc: Source.Source_Desc, searchCUI: searchCUI, codeSet: codes[x].codeSet, code: codes[x].code })
-            }
+            // First check and make sure the CUI is already in Codes (i.e. a duplicate)
+            cur = Codes.find({ _id: rowID, }, { fields: { cui: { $elemMatch: { searchCUI: searchCUI } } } }).fetch()[0].cui // check if this CUI already saved. 
+           // console.dir(typeof(cur))
+            if (typeof(cur) ==='undefined') { // if no match
+                var Cname = Results.findOne({ rowID: rowID, purpose: 'resultDisplay' }, { fields: { result: { $elemMatch: { ui: searchCUI } } }}).result[0].name
+                //console.log('searchCUI: '+searchCUI)
+                //console.log(Cname)
             
-            // push  CUI to "Saved CUIs" array in codes to update main table         
-            Codes.update({ _id: rowID }, { $push: { searchCUIs: searchCUI } })
+                // Pull the codes & CUI from results
+                var codes = Results.find({ rowID: rowID, purpose: 'CodesSearch' }, { fields: { codeSet: 1, code: 1, _id: 0 } }).fetch()
+                // Cui is already given through argument!
+                // get Source_Code, Source_Desc from Codes
+                Source = Codes.findOne({ _id: rowID }, { fields: { Source_Code: 1, Source_Desc: 1 } })
+                // for each code, everything (Source Code, Source Desc, CUI, Code) to Saved (this is for papa parse and easy exporting)
+                for (x in codes) {
+                    // console.log(codes[x].codeSet+codes[x].code)
+                    Saved.insert({ rowID: rowID, Source_Code: Source.Source_Code, Source_Desc: Source.Source_Desc, ConceptCode: searchCUI, ConceptName: Cname, codeSet: codes[x].codeSet, codeSetCode: codes[x].code })
+                }
+                // push  CUI to "Saved CUIs" and names to array then to codes to update main table
+                //var cui = [ searchCUI, Cname ]
+                Codes.update({ _id: rowID }, { $push: { cui: { searchCUI: searchCUI, Cname: Cname } } } )
+            } else { return false } 
         },
                 // This removes a result from the target fields based on the row. 
 		'removeOne': function (rowID) {
             console.log('results deleted')
             Saved.remove({ rowID: rowID }) // removes any saved codes from the row
-            Codes.update({ _id: rowID }, { $set: { searchCUIs: [] } }) // removes searchCUIs from the view
+            Codes.update({ _id: rowID }, { $set: { cui: [] } }) // removes cui from the view
         },
-
 
 	})
 }

@@ -33,15 +33,6 @@
   </div>
 </template>
 
-<template name='resultsdisplay'>
-	<ul>
-		{{#each results}}
-			{{#each data}}
-				<li>{{name}}</li>
-			{{/each}}
-		{{/each}}
-	</ul>
-</template>
 
 <template name="bigtable">
   <div>
@@ -49,14 +40,11 @@
     <thead>
       <tr>
         <th>
-            <button class='btn allCodeSearch'>Search All Codes </button>
-            <button class='btn allDescSearch btn-primary'> Search All Descriptions </button><br />
+            <button class='btn allCodeSearch'>Search Codes</button>
+            <button class='btn allDescSearch btn-primary'>Search Descriptions</button><br />
             Source Codes
         </th>
-
-
-           <td>Saved Codes</td>
-          
+        <th class="col-12">Saved Concepts</th>
         <th>del</th>  
         <th> Search Stuff </th>     
       </tr>
@@ -65,13 +53,15 @@
 	    {{#each codes}}
 	      <tr class = 'coderow'>
 	        <td class="col-12">{{Source_Code}}: {{Source_Desc}}</td>
-          <td>{{#each cuis}}
-                    {{searchCUIs}}
-                {{/each}}</td>
-          <td class='col float-right'>
-            <div class='btn-group'>              
+          <td class="col-12" style="width: 400px">
+              <div style="overflow-x:auto">
+                  {{#each cuis}}
+                    {{searchCUI}}: {{Cname}} <br />
+                  {{/each}}
+              </div>
+          </td>
+          <td>
               <button class='btn btn-warning removeButton'>X</button>
-            </div>
           </td>  
           <td class="col-12 bg-info">
             <select class="resultSelector" id="{{_id}}resultSelect" style="width: 400px">

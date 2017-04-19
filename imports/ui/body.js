@@ -28,12 +28,7 @@ Template.body.helpers({
     },
 })
 
-Template.resultsdisplay.helpers({
-	results() {
-		//return Meteor.call('results.find');
-		return Results.find({})
-	}
-})
+
 
 Template.bigtable.helpers({	
 	//tableColumn1(){
@@ -50,7 +45,9 @@ Template.bigtable.helpers({
     },
 
     cuis() {
-        return Codes.find({ _id: this._id }, { fields: { searchCUIs: 1 } })
+        var cui = Codes.findOne({ _id: this._id }, { fields: { cui: 1} }).cui
+        console.dir(cui)
+        return cui
     },
 	results(){
         var res = Results.find({ rowID: this._id }, { sort: { createdAt: -1 } }).fetch()[0] //finds most recent result for the row.
@@ -116,8 +113,7 @@ Template.bigtable.events({
 		//console.log('clicked saveButton')
         var rowID = this._id
         var searchCUI = document.getElementById(this._id+'resultSelect').value
-        Meteor.call('saveOne', rowID, searchCUI)
-        
+        Meteor.call('saveOne', rowID, searchCUI)  
     },
 
     'submit .searchBox': function (event, template) {

@@ -16,10 +16,10 @@ if (Meteor.isServer) {
 	})
     // just always run this at startup to ensure above codesystem is correct:
     CodeSystems.rawCollection().drop()
-    console.log('Codesystems:')
+    //console.log('Codesystems:')
 	for (x in codes) {
         CodeSystems.insert({ 'codesystem': codes[x] })
-        console.log(codes[x])
+       // console.log(codes[x])
     }
     
     
