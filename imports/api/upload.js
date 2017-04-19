@@ -51,19 +51,15 @@ if (Meteor.isServer) {
 	Meteor.methods({
 		parseUpload: function( data ){ // takes data that is passed from the parsed CVS above.
 			check( data, Array )
+			
 			//codesColumns = [] // clear column names variable
 			//console.log(data[0])
 			for (let i=0; i< data.length; i++) { // Insert each field as a new row.
 				Codes.insert( data[i] )
 				//console.log(data[i])
 			}
-			for (var key in Codes.findOne({})) { // Loads column names in an array
-					//console.log('key: '+key)
-					codesColumns.push(key)
-					console.log(codesColumns)
-				}
-			Codes.update({},{$set: {Target_Code: ''}}, {multi: true}) // Add the empty target columns to all documents
-			Codes.update({},{$set: {Target_Desc: ''}}, {multi: true})
+			//Codes.update({},{$set: {Target_Code: ''}}, {multi: true}) // Add the empty target columns to all documents
+			//Codes.update({},{$set: {Target_Desc: ''}}, {multi: true}) // not really necessary
 		},
 	})
 }

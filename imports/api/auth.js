@@ -38,7 +38,7 @@ if (Meteor.isServer) {
 					console.log('TGT get status: '+ this.call.statusCode);
 					//console.log(this.call.headers);
 					TGT = this.call.headers.location; // Store in TGT after parsing json
-                    console.log("newTGT: " + TGT); // Print the parsing  
+                    //console.log("newTGT: " + TGT); // Print the parsing  
 					return true;
 				} catch (e) {
 					console.log(e);
@@ -53,7 +53,7 @@ if (Meteor.isServer) {
 				try{
 					this.call = HTTP.call("POST", TGT, {params: {service: 'http://umlsks.nlm.nih.gov'}});
 					var ticket = this.call.content;
-					console.log('New single-use ticket: '+ticket);
+					//console.log('New single-use ticket: '+ticket);
 					return ticket;
 				} catch (e) {
 					console.log(e);
