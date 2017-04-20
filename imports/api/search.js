@@ -34,8 +34,15 @@ if (Meteor.isServer) {
                             console.log('searchApi error: ' + error.statuscode)
                         } else {
                             var result = res.data.result.results
-                            Results.insert({ rowID: rowID, purpose: 'resultDisplay', createdAt: new Date(), result })  //write the results using the async function (vs returning a result to some other function which is not async)
+                            Results.insert({
+                                rowID: rowID,
+                                purpose: 'resultDisplay',
+                                createdAt: new Date(),
+                                result
+                            })  //write the results using the async function (vs returning a result to some other function which is not async)
                             var searchCUI = result[0].ui //Just get first result in this case (to populate the code under the drop-down)
+                           // var searchCUIName = result[0].name
+                           // var searchCUIName = result[0].name
                             Meteor.call('getConceptCodes', rowID, searchCUI)  // this will get the actual target code (such as SNOMED code) for the selectID to fill populate under each search result.
                         }
                     }
@@ -65,19 +72,28 @@ if (Meteor.isServer) {
                         }
                     }, function (err, res) {
                         if (err) {
-                            //console.log('searchCUI error: ')
-                            //console.log(err.content)
+                            // this call will error EVERY time there is no result, which is a lot. Just leaving it blank. 
                         } else {
                             //console.log(searchTarget)
                             //console.log(res.data.result[0].code)
                             // store first result somewhere with corresponsing target code. 
-                            //console.dir(res.data.result)
+                           // console.dir(res.data.result)
                             for (x in res.data.result) {
                                 codeUrl = res.data.result[x].code // The resulted code. Is a whole https url.
                                 codeSplit = codeUrl.split("/") // split the URL by / 
                                 code = codeSplit[(codeSplit.length - 1)] // - we only want the last bit
-                                //  console.log('found: ' + searchTarget + ": " + code)
-                                Results.insert({ rowID: rowID, purpose: 'CodesSearch', searchCUI: searchCUI, codeSet: searchTarget, codeSetOID: searchTargetOID, code: code, termType: res.data.result[x].termType, termName: res.data.result[x].name})
+                                //  Store the results in the Results collection with the rowID and alias "CodesSearch" so we can find them easily later.
+                                Results.insert({
+                                    rowID: rowID,
+                                    purpose: 'CodesSearch',
+                                    searchCUI: searchCUI,
+                                   // searchCUIName: searchCUIName,
+                                    codeSet: searchTarget,
+                                    codeSetOID: searchTargetOID,
+                                    code: code,
+                                    termType: res.data.result[x].termType,
+                                    termName: res.data.result[x].name
+                                })
                             }
                         }
                     }
@@ -98,7 +114,6 @@ if (Meteor.isServer) {
                 searchTargetOID = CS[x].OID
                // console.log(searchTarget)
                 //console.log(searchTargetOID)
-                searchTargetOID = CS[x].OID
                 searchTTY = CS[x].TTY
                 Meteor.call('searchCUI', searchCUI, searchTarget, searchTargetOID, searchTTY, rowID)
             }
@@ -139,12 +154,12 @@ if (Meteor.isServer) {
 
         // This saves a single selected (selectID) result to the Codes table in the Target fields.
         'saveOne': function (rowID, searchCUI) {
-            // First check and make sure the CUI is already in Codes (i.e. a duplicate)
+            // First check and make sure the CUI is not already in Codes (i.e. a duplicate)
             cur = Codes.find({ _id: rowID, }, { fields: { cui: { $elemMatch: { searchCUI: searchCUI } } } }).fetch()[0].cui // check if this CUI already saved. 
             //console.dir(typeof(cur))
             if (typeof (cur) === 'undefined') { // if no match...
-                
-                var res = Results.findOne({ rowID: rowID, purpose: 'resultDisplay' }, { fields: { result: { $elemMatch: { ui: searchCUI } } } }).result
+
+                var res = Results.findOne({ rowID: rowID, purpose: 'CodesSearch' })
                 //console.dir(res)
                 //console.log(typeof (res))
 
@@ -153,9 +168,10 @@ if (Meteor.isServer) {
                     return false
                 }
 
-                var Cname = res[0].name
+                var Cname = Results.find({ rowID: rowID, purpose: 'resultDisplay' }, { fields: { result: { $elemMatch: { ui: searchCUI } } } }).fetch()[0].result[0].name
+                //var Cname = 'placeholder'
                 //console.log('searchCUI: '+searchCUI)
-                //console.log(Cname)
+                console.dir(Cname)
             
                 // Pull the codes & CUI from results
                 var codes = Results.find({ rowID: rowID, purpose: 'CodesSearch' }).fetch() //, { fields: { codeSetOID: 1, codeSet: 1, code: 1, _id: 0 } }).fetch()

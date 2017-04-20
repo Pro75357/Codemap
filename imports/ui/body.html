@@ -1,27 +1,36 @@
 <body>
-	<div class="page-header container" style="background: lightgrey">
-        <div class="col-3">
-            <h1>Codemap</h1>
-            <p>User: {{> loginButtons}}</p>
-            <p> using codeSystems: {{#each codesystems}}{{codesystem}}, {{/each}}</p>
+    <div class="wrapper">
+        <div class="container-fluid" style="background: #002638">
+            <div class="container">
+                <div class="col-3">
+                    <h1 style="color:white">Codemap</h1>
+                    <p style="color:white">User: {{> loginButtons}}</p>
+                    <p style="color:white"> using codeSystems: {{#each codesystems}}{{codesystem}}, {{/each}}</p>
+                </div>
+            </div>
         </div>
-        <div class="col-6 float-right">{{> buttons}}</div>
-  </div>
-	{{#if currentUser}}
-		<div class="container">
-      {{> upload}}
-      <br/>
-		
-		</div>
-		<div class="container-fluid">
-  		<hr/>
-  		{{> bigtable}}
-		</div>
-    <div class="page=footer">
-        {{> export}}
+        {{#if currentUser}}
+        <div class="container">
+            {{> upload}}
+            <br />
+
+        </div>
+        <div class="container-fluid">
+            <hr />
+
+            {{> bigtable}}
+        </div>
+
+
+        {{/if}}
+        <div class="container" style="height: 80px"></div>
     </div>
-	{{/if}}
+        <div class="footer" style="background: #002638">
+            <div class="col-md-3 pull-right"><p style="color: white"> Step 3: Export data</p>{{> export}} </div>
+        </div>
+    
 </body>
+
 
 <!-- HERE BE TEMPLATES -->
 
@@ -45,46 +54,65 @@
     <thead>
       <tr>
         <th>
-            <button class='btn allCodeSearch'>Search Codes</button>
-            <button class='btn allDescSearch btn-primary'>Search Descriptions</button><br />
+            <button class='btn allDescSearch btn-primary pull-right'>Search All Descriptions</button><br />
             Source Codes
         </th>
+          <th>
+              Search Stuff
+          </th>  
+          
         <th class="col-12">Saved Concepts</th>
-        <th>del</th>  
-        <th> Search Stuff </th>     
+          <th>del
+              <div class="pull-right">
+                  <form class='ResetDB-button'>
+                      <input type="submit" class="btn btn-warning" value="Reset ALL" />
+                  </form>
+              </div>
+          </th>  
+        
+      
+           
       </tr>
     </thead>
     <tbody>
 	    {{#each codes}}
 	      <tr class = 'coderow'>
-	        <td class="col-12">{{externalCode}}: {{externalCodeDescription}}</td>
-          <td class="col-12" style="width: 400px">
+
+	        <td class="col-12">{{externalCode}}: <br/> {{externalCodeDescription}}</td>
+            <td class="col-12 bg-success">
+                <select class="resultSelector" id="{{_id}}resultSelect" style="width: 400px">
+                    {{#each results}}
+                    <option value='{{ui}}'>{{ui}}: {{name}}</option>
+                    {{/each}}
+                </select>
+                
+                <form class="searchBox">
+                    <input type="submit" value="New Search">
+                    <input id="{{_id}}search" type="text" value="{{externalCodeDescription}}" style="width: 303px">
+                </form>
+                <button class="btn btn-primary saveButton pull-right">Save</button>
+                <p>
+                    {{#each resultcodes}}
+                    {{codeSet}}: {{code}},
+                    {{/each}}
+                </p>
+                
+            </td>
+
+            <td class="col-12" style="width: 400px">
               <div style="overflow-x:auto">
                   {{#each cuis}}
                     {{searchCUI}}: {{Cname}} <br />
                   {{/each}}
               </div>
           </td>
+
           <td>
               <button class='btn btn-warning removeButton'>X</button>
           </td>  
-          <td class="col-12 bg-info">
-            <select class="resultSelector" id="{{_id}}resultSelect" style="width: 400px">
-            {{#each results}}
-              <option value = '{{ui}}'>{{ui}}: {{name}}</option>
-            {{/each}}
-            </select>
-              <button class="btn btn-primary saveButton">Save</button>
-                  <form class="searchBox">
-                    <input id="{{_id}}search" type="text" value="{{externalCodeDescription}}" style="width: 350px">
-                    <input type="submit" value="New Search">
-                </form> 
-              <br />
-              {{#each resultcodes}}
-               {{codeSet}}: {{code}},
-              {{/each}}
-             
-          </td>
+
+
+
 	      </tr>
 		{{/each}}
     </tbody>
@@ -92,19 +120,6 @@
   </div>
   </template>
   
-  <template name = "buttons">
-    <div class='row'>
-      <div class="pull-right">
-        <form class='ResetDB-button'>
-          <input type="submit" class="btn btn-warning" value="Reset DB"/>
-        </form>
-        <form class='magic-button'>
-          <input type="submit" class="btn btn-warning" value="Magic"/>
-        </form>
-      </div>
-    </div>
-  </template>
-
 <template name="export">
   <button class="export-data btn btn-success" data-loading-text="Exporting...">Export Data</button>
 </template>
