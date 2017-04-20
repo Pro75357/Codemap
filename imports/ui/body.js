@@ -40,7 +40,7 @@ Template.bigtable.helpers({
 	codes(){
 		//console.log(Codes.find({}).fetch())
 		return Codes.find({},
-		 {sort: { Source_Code: 1 }}
+            { sort: { externalCode: 1 }}
 		 )
     },
 

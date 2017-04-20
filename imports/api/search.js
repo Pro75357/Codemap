@@ -114,23 +114,22 @@ if (Meteor.isServer) {
         // This is the method that searches the UMLS database against every imported "Source_Desc". Is the MAIN batch function. 
         'descFetch': function () {
             Results.rawCollection().drop() // clear any previous results. 
-            var code = Codes.find({}, { sort: { Source_Code: 1 } }).fetch() // gets all the codes from the collection, in order of the table (so they update in the right order)
+            var code = Codes.find({}, { sort: { externalCode: 1 } }).fetch() // gets all the codes from the collection, in order of the table (so they update in the right order)
             //console.log('Fetch Search Target: '+searchTarget)
             for (x in code) { // for each row in the codes table... 
                 //console.log('Searching: ' + code[x].Source_Desc)
                 rowID = code[x]._id // so we can pass this row's ID
-                Meteor.call('searchApi', code[x].Source_Desc, 'words', rowID)  // Pass all the stuff to 'searchApi'- which does an async call and inserts results. 
+                Meteor.call('searchApi', code[x].externalCodeDescription, 'words', rowID)  // Pass all the stuff to 'searchApi'- which does an async call and inserts results. 
             }
         },
 
         // this does the exact same thing as 'descFetch' but uses the CODES field and an 'exact' match. 
         'codesFetch': function () {
             Results.rawCollection().drop() // clear previous results. 
-            var code = Codes.find({}, { sort: { Source_Code: 1 } }).fetch()
+            var code = Codes.find({}, { sort: { externalCode: 1 } }).fetch()
             for (x in code) {
-               // console.log('Searching: ' + code[x].Source_Code)
                 rowID = code[x]._id
-                Meteor.call('searchApi', code[x].Source_Code, 'exact', rowID)
+                Meteor.call('searchApi', code[x].externalCode, 'exact', rowID)
             }
         },
 
@@ -161,8 +160,8 @@ if (Meteor.isServer) {
                 // Pull the codes & CUI from results
                 var codes = Results.find({ rowID: rowID, purpose: 'CodesSearch' }).fetch() //, { fields: { codeSetOID: 1, codeSet: 1, code: 1, _id: 0 } }).fetch()
                 // Cui is already given through argument!
-                // get Source_Code, Source_Desc from Codes
-                Source = Codes.findOne({ _id: rowID }, { fields: { Source_Code: 1, Source_Desc: 1 } })
+                // get externalCode, externalCodeDescription from Codes
+                Source = Codes.findOne({ _id: rowID })
                 // for each code, everything (Source Code, Source Desc, CUI, Code) to Saved (this is for papa parse and easy exporting)
                 for (x in codes) {
                     // console.log(codes[x].codeSet+codes[x].code)
@@ -170,8 +169,10 @@ if (Meteor.isServer) {
                     // Put each result in "Saved" collection (which is the one used for export)
                     Saved.insert({
                         rowID: rowID,
-                        Source_Code: Source.Source_Code,
-                        Source_Desc: Source.Source_Desc,
+                        externalDataSource: Source.externalDataSource,
+                        externalCodeSystem: Source.externalCodeSystem,
+                        externalCode: Source.externalCode,
+                        externalCodeDescription: Source.externalCodeDescription,
                         ConceptCode: searchCUI,
                         ConceptName: Cname,
                         codeSet: codes[x].codeSet,

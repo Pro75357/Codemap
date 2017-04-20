@@ -1,20 +1,25 @@
 <body>
 	<div class="page-header container" style="background: lightgrey">
-		  <h1>Codemap</h1>
-			<p>User: {{> loginButtons}}</p>
-        <p> using codeSystems: {{#each codesystems}}{{codesystem}}, {{/each}}</p>
+        <div class="col-3">
+            <h1>Codemap</h1>
+            <p>User: {{> loginButtons}}</p>
+            <p> using codeSystems: {{#each codesystems}}{{codesystem}}, {{/each}}</p>
+        </div>
+        <div class="col-6 float-right">{{> buttons}}</div>
   </div>
 	{{#if currentUser}}
 		<div class="container">
       {{> upload}}
       <br/>
-			{{> buttons}}
-      {{> export}}
+		
 		</div>
 		<div class="container-fluid">
   		<hr/>
   		{{> bigtable}}
 		</div>
+    <div class="page=footer">
+        {{> export}}
+    </div>
 	{{/if}}
 </body>
 
@@ -22,7 +27,7 @@
 
 <template name='upload'>
   <div class="container">
-    <h4>Step 1: Upload 2-column CSV with row headers:  "Source_Code" and "Source_Desc"</h4>
+    <h4>Step 1: Upload CSV with rows:  "externalDataSource", "externalCodeSystem", "externalCode", "externalCodeDescription"</h4>
     {{#unless uploading}}
       <form class='upload' method="POST" enctype='multipart/form-data'>
         <input type='file' name="uploadCSV">
@@ -52,7 +57,7 @@
     <tbody>
 	    {{#each codes}}
 	      <tr class = 'coderow'>
-	        <td class="col-12">{{Source_Code}}: {{Source_Desc}}</td>
+	        <td class="col-12">{{externalCode}}: {{externalCodeDescription}}</td>
           <td class="col-12" style="width: 400px">
               <div style="overflow-x:auto">
                   {{#each cuis}}
@@ -71,7 +76,7 @@
             </select>
               <button class="btn btn-primary saveButton">Save</button>
                   <form class="searchBox">
-                    <input id="{{_id}}search" type="text" value="{{Source_Desc}}" style="width: 350px">
+                    <input id="{{_id}}search" type="text" value="{{externalCodeDescription}}" style="width: 350px">
                     <input type="submit" value="New Search">
                 </form> 
               <br />
