@@ -3,14 +3,21 @@ import { Mongo } from 'meteor/mongo'
 export const CodeSystems = new Mongo.Collection('codesystems');
 
  var codes = [
- 	{'codesystem': 'CPT', 'OID': '2.16.840.1.113883.6.12'},
- 	{'codesystem': 'ICD10CM', 'OID': '2.16.840.1.113883.6.90'},
- 	{'codesystem': 'SNOMEDCT_US', 'OID': '2.16.840.1.113883.6.96'}
+ 	{ 'codesystem': 'CPT',          'TTY': 'ETCLIN',    'OID': '2.16.840.1.113883.6.12'},
+    { 'codesystem': 'ICD10CM',      'TTY': '',          'OID': '2.16.840.1.113883.6.90' },
+    { 'codesystem': 'ICD10PCS',     'TTY': '', 'OID': '2.16.840.1.113883.6.4' },
+    { 'codesystem': 'ICD9CM', 'TTY': '', 'OID': '2.16.840.1.113883.6.103' },  // using ICD9CM diagnosis version as OID code, 
+    { 'codesystem': 'SNOMEDCT_US',  'TTY': 'PT',        'OID': '2.16.840.1.113883.6.96' },
+    { 'codesystem': 'RXNORM',       'TTY': '',          'OID': '2.16.840.1.113883.6.88' },
+    { 'codesystem': 'LNC',          'TTY': '',          'OID': '2.16.840.1.113883.6.1' },
+    { 'codesystem': 'HCPCS',        'TTY': '',          'OID': '2.16.840.1.113883.6.14' },
+    { 'codesystem': 'SOP', 'TTY': '', 'OID': '2.16.840.1.113883.3.221.5' }
  ]
 
- //'ICD10CM', 'ICD9CM', 'SNOMEDCT_US', 'RXNORM', 'LNC', 'SOP', 'CPT', 'HCPCS'
 
 // all avalilable "sabs" at: https://www.nlm.nih.gov/research/umls/knowledge_sources/metathesaurus/release/active_release.html
+
+// Available 'code systems' with OID code at : https://www.nlm.nih.gov/vsac/support/usingvsac/code-systems.html
 
 if (Meteor.isClient) {
 	Meteor.subscribe('codesystems')

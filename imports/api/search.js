@@ -51,7 +51,7 @@ if (Meteor.isServer) {
         //Second-level search - retruns 'atoms' for a Concept Unique Identifier (CUI)
         // CUI is the main code returned from searchApi method
 
-        'searchCUI': function (searchCUI, searchTarget,searchTargetOID,rowID) {
+        'searchCUI': function (searchCUI, searchTarget,searchTargetOID,searchTTY, rowID) {
             // console.log("searching: " + searchCUI)
             try {
                 HTTP.call(
@@ -61,7 +61,7 @@ if (Meteor.isServer) {
                         params: {
                             ticket: Meteor.call('getTicket'),
                             sabs: searchTarget,
-                           // ttys: 'PT' // return only "preferred term"
+                            ttys: searchTTY // return only term types as specificed from codeSystems
                         }
                     }, function (err, res) {
                         if (err) {
@@ -71,12 +71,14 @@ if (Meteor.isServer) {
                             //console.log(searchTarget)
                             //console.log(res.data.result[0].code)
                             // store first result somewhere with corresponsing target code. 
-                            console.dir(res.data.result)
-                            codeUrl = res.data.result[0].code // The first resulted code. Is a whole https url.
-                            codeSplit = codeUrl.split("/") // split the URL by / 
-                            code = codeSplit[(codeSplit.length - 1)] // - we only want the last bit
-                          //  console.log('found: ' + searchTarget + ": " + code)
-                            Results.insert({ rowID: rowID, purpose: 'CodesSearch', searchCUI: searchCUI, codeSet: searchTarget, codeSetOID: searchTargetOID, code: code })
+                            //console.dir(res.data.result)
+                            for (x in res.data.result) {
+                                codeUrl = res.data.result[x].code // The resulted code. Is a whole https url.
+                                codeSplit = codeUrl.split("/") // split the URL by / 
+                                code = codeSplit[(codeSplit.length - 1)] // - we only want the last bit
+                                //  console.log('found: ' + searchTarget + ": " + code)
+                                Results.insert({ rowID: rowID, purpose: 'CodesSearch', searchCUI: searchCUI, codeSet: searchTarget, codeSetOID: searchTargetOID, code: code, termType: res.data.result[x].termType, termName: res.data.result[x].name})
+                            }
                         }
                     }
                 )
@@ -94,10 +96,11 @@ if (Meteor.isServer) {
             for (x in CS) {
                 searchTarget = CS[x].codesystem
                 searchTargetOID = CS[x].OID
-                console.log(searchTarget)
-                console.log(searchTargetOID)
+               // console.log(searchTarget)
+                //console.log(searchTargetOID)
                 searchTargetOID = CS[x].OID
-                Meteor.call('searchCUI', searchCUI, searchTarget, searchTargetOID, rowID)
+                searchTTY = CS[x].TTY
+                Meteor.call('searchCUI', searchCUI, searchTarget, searchTargetOID, searchTTY, rowID)
             }
         },
 
@@ -114,7 +117,7 @@ if (Meteor.isServer) {
             var code = Codes.find({}, { sort: { Source_Code: 1 } }).fetch() // gets all the codes from the collection, in order of the table (so they update in the right order)
             //console.log('Fetch Search Target: '+searchTarget)
             for (x in code) { // for each row in the codes table... 
-                console.log('Searching: ' + code[x].Source_Desc)
+                //console.log('Searching: ' + code[x].Source_Desc)
                 rowID = code[x]._id // so we can pass this row's ID
                 Meteor.call('searchApi', code[x].Source_Desc, 'words', rowID)  // Pass all the stuff to 'searchApi'- which does an async call and inserts results. 
             }
@@ -139,32 +142,58 @@ if (Meteor.isServer) {
         'saveOne': function (rowID, searchCUI) {
             // First check and make sure the CUI is already in Codes (i.e. a duplicate)
             cur = Codes.find({ _id: rowID, }, { fields: { cui: { $elemMatch: { searchCUI: searchCUI } } } }).fetch()[0].cui // check if this CUI already saved. 
-           // console.dir(typeof(cur))
-            if (typeof(cur) ==='undefined') { // if no match
-                var Cname = Results.findOne({ rowID: rowID, purpose: 'resultDisplay' }, { fields: { result: { $elemMatch: { ui: searchCUI } } }}).result[0].name
+            //console.dir(typeof(cur))
+            if (typeof (cur) === 'undefined') { // if no match...
+                
+                var res = Results.findOne({ rowID: rowID, purpose: 'resultDisplay' }, { fields: { result: { $elemMatch: { ui: searchCUI } } } }).result
+                //console.dir(res)
+                //console.log(typeof (res))
+
+                if (typeof (res) === 'undefined') {  // if no results log this and do not save anything (and quit erroring)
+                    console.log('no results to save')
+                    return false
+                }
+
+                var Cname = res[0].name
                 //console.log('searchCUI: '+searchCUI)
                 //console.log(Cname)
             
                 // Pull the codes & CUI from results
-                var codes = Results.find({ rowID: rowID, purpose: 'CodesSearch' }, { fields: { codeSetOID: 1, codeSet: 1, code: 1, _id: 0 } }).fetch()
+                var codes = Results.find({ rowID: rowID, purpose: 'CodesSearch' }).fetch() //, { fields: { codeSetOID: 1, codeSet: 1, code: 1, _id: 0 } }).fetch()
                 // Cui is already given through argument!
                 // get Source_Code, Source_Desc from Codes
                 Source = Codes.findOne({ _id: rowID }, { fields: { Source_Code: 1, Source_Desc: 1 } })
                 // for each code, everything (Source Code, Source Desc, CUI, Code) to Saved (this is for papa parse and easy exporting)
                 for (x in codes) {
                     // console.log(codes[x].codeSet+codes[x].code)
-                    Saved.insert({ rowID: rowID, Source_Code: Source.Source_Code, Source_Desc: Source.Source_Desc, ConceptCode: searchCUI, ConceptName: Cname, codeSet: codes[x].codeSet, codeSetOID: codes[x].codeSetOID, codeSetCode: codes[x].code })
+
+                    // Put each result in "Saved" collection (which is the one used for export)
+                    Saved.insert({
+                        rowID: rowID,
+                        Source_Code: Source.Source_Code,
+                        Source_Desc: Source.Source_Desc,
+                        ConceptCode: searchCUI,
+                        ConceptName: Cname,
+                        codeSet: codes[x].codeSet,
+                        codeSetOID: codes[x].codeSetOID,
+                        codeSetCode: codes[x].code,
+                        termType: codes[x].termType,
+                        termName: codes[x].termName
+                    })
                 }
                 // push  CUI to "Saved CUIs" and names to array then to codes to update main table
                 //var cui = [ searchCUI, Cname ]
                 Codes.update({ _id: rowID }, { $push: { cui: { searchCUI: searchCUI, Cname: Cname } } } )
-            } else { return false } 
+            } else {
+                console.log('not inserting duplicate')
+                return false
+            } 
         },
                 // This removes a result from the target fields based on the row. 
 		'removeOne': function (rowID) {
             console.log('results deleted')
-            Saved.remove({ rowID: rowID }) // removes any saved codes from the row
-            Codes.update({ _id: rowID }, { $set: { cui: [] } }) // removes cui from the view
+            Saved.remove({ rowID: rowID }) // removes any saved codes from the whole row from the row
+            Codes.update({ _id: rowID }, { $unset: { cui:1} }) // removes cuis from the view
         },
 
 	})
