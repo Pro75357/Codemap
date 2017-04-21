@@ -176,7 +176,7 @@ if (Meteor.isServer) {
                 var Cname = Results.find({ rowID: rowID, purpose: 'resultDisplay' }, { fields: { result: { $elemMatch: { ui: searchCUI } } } }).fetch()[0].result[0].name
                 //var Cname = 'placeholder'
                 //console.log('searchCUI: '+searchCUI)
-                console.dir(Cname)
+                //console.dir(Cname)
             
                 // Pull the codes & CUI from results
                 var codes = Results.find({ rowID: rowID, purpose: 'CodesSearch' }).fetch() //, { fields: { codeSetOID: 1, codeSet: 1, code: 1, _id: 0 } }).fetch()
