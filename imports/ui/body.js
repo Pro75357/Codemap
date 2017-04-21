@@ -8,19 +8,7 @@ import { Results } from '../api/results.js'
 import { Codes } from '../api/codes.js'
 import { CodeSystems } from '../api/codeSystems.js'
 
-Template.buttons.events({
 
-	'submit .ResetDB-button' (event) {
-		event.preventDefault()
-		Meteor.call('resetDB')
-		console.log('Database Full Reset')
-	},
-
-	'submit .magic-button' (event) {
-		event.preventDefault();
-		console.log('Magic!');  // this is just for testing method calls
-	}
-})
 
 Template.body.helpers({
     codesystems() {
@@ -40,7 +28,7 @@ Template.bigtable.helpers({
 	codes(){
 		//console.log(Codes.find({}).fetch())
 		return Codes.find({},
-		 {sort: { Source_Code: 1 }}
+            { sort: { externalCode: 1 }}
 		 )
     },
 
@@ -50,7 +38,7 @@ Template.bigtable.helpers({
         return cui
     },
 	results(){
-        var res = Results.find({ rowID: this._id }, { sort: { createdAt: -1 } }).fetch()[0] //finds most recent result for the row.
+        var res = Results.find({ rowID: this._id }).fetch()[0] //finds most recent result for the row.
 		//console.dir(res)
 		//console.dir(res)
 		if (typeof res === 'undefined'){
@@ -79,8 +67,14 @@ Template.bigtable.events({
     'click .allCodeSearch': function (event, template) {
         // call umls fetch with words and normal matches
       // var searchTarget = document.getElementById('searchTarget').value
-       Meteor.call('codesFetch', searchTarget)
+       Meteor.call('codesFetch')
         // send search target along to update selectors. 
+    },
+
+    'submit .ResetDB-button'(event) {
+        event.preventDefault()
+        Meteor.call('resetDB')
+        console.log('Database Full Reset')
     },
 
     'click .allDescSearch': function (event, template) {

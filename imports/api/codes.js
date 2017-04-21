@@ -22,8 +22,8 @@ if (Meteor.isServer) {
             Results.rawCollection().drop()
             Saved.rawCollection().drop()
 
-			Codes.insert({Source_Code: 'None'}) // Add in a simple structure and some info as a placeholder
-			Codes.update({}, {$set: {Source_Desc: 'No data: Please upload CSV'}})
+            Codes.insert({ externalCode: 'None'}) // Add in a simple structure and some info as a placeholder
+            Codes.update({}, { $set: { externalCodeDescription: 'No data: Please upload CSV'}})
 			//codesColumns = [] // clear column names variable
 			//for (var key in Codes.findOne({})) { // Loads new column names in the array
 				//console.log('key: '+ key)
