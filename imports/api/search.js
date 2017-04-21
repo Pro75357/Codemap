@@ -34,10 +34,13 @@ if (Meteor.isServer) {
                             console.log('searchApi error: ' + error.statuscode)
                         } else {
                             var result = res.data.result.results
+                            //clear any previous "resultsDisplay" results in that row before populating new ones
+                            Results.remove({rowID: rowID, purpose: 'resultDisplay'})
+                            // populate new results
                             Results.insert({
                                 rowID: rowID,
                                 purpose: 'resultDisplay',
-                                createdAt: new Date(),
+                             //   createdAt: new Date(),
                                 result
                             })  //write the results using the async function (vs returning a result to some other function which is not async)
                             var searchCUI = result[0].ui //Just get first result in this case (to populate the code under the drop-down)

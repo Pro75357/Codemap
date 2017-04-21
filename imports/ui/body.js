@@ -38,7 +38,7 @@ Template.bigtable.helpers({
         return cui
     },
 	results(){
-        var res = Results.find({ rowID: this._id }, { sort: { createdAt: -1 } }).fetch()[0] //finds most recent result for the row.
+        var res = Results.find({ rowID: this._id }).fetch()[0] //finds most recent result for the row.
 		//console.dir(res)
 		//console.dir(res)
 		if (typeof res === 'undefined'){
