@@ -134,19 +134,21 @@ if (Meteor.isServer) {
             for (x in code) { // for each row in the codes table... 
                 //console.log('Searching: ' + code[x].Source_Desc)
                 rowID = code[x]._id // so we can pass this row's ID
-                Meteor.call('searchApi', code[x].externalCodeDescription, 'words', rowID)  // Pass all the stuff to 'searchApi'- which does an async call and inserts results. 
+                searchText = code[x].externalCodeDescription
+                console.log(searchText)
+                Meteor.call('searchApi', searchText, 'words', rowID)  // Pass all the stuff to 'searchApi'- which does an async call and inserts results. 
             }
         },
 
         // this does the exact same thing as 'descFetch' but uses the CODES field and an 'exact' match. 
-        'codesFetch': function () {
-            Results.rawCollection().drop() // clear previous results. 
-            var code = Codes.find({}, { sort: { externalCode: 1 } }).fetch()
-            for (x in code) {
-                rowID = code[x]._id
-                Meteor.call('searchApi', code[x].externalCode, 'exact', rowID)
-            }
-        },
+       // 'codesFetch': function () {
+       //     Results.rawCollection().drop() // clear previous results. 
+       //     var code = Codes.find({}, { sort: { externalCode: 1 } }).fetch()
+      //      for (x in code) {
+      //          rowID = code[x]._id
+      //          Meteor.call('searchApi', code[x].externalCode, 'exact', rowID)
+      //      }
+      //  },
 
         'clearTempCodes': function (rowID) {
             Results.remove({ rowID: rowID, purpose: 'CodesSearch' }) // clear any previous results on this row before calling new results
