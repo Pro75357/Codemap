@@ -1,0 +1,10 @@
+externalDataSource,externalCodeSystem,externalCode,externalCodeDescription
+OCHIN_EPIC,CLARITY_EXTRACT.CLARITY_EDG,432558,Polycythemia
+OCHIN_EPIC,CLARITY_EXTRACT.CLARITY_EDG,379750,Ac DVT/embl low ext
+OCHIN_EPIC,CLARITY_EXTRACT.CLARITY_EDG,210,Tuberculous pleurisy
+OCHIN_EPIC,CLARITY_EXTRACT.CLARITY_EDG,1462385,Chronic seasonal allergic rhinitis
+OCHIN_EPIC,CLARITY_EXTRACT.CLARITY_EDG,1465792,"Closed TBI (traumatic brain injury), with LOC of 6 hr - 24 hr, subsequent encounter"
+OCHIN_EPIC,CLARITY_EXTRACT.CLARITY_EDG,1481497,"Aortic valve regurgitation, unspecified etiology"
+OCHIN_EPIC,ICD-10-CM,D68.0,Von Willebrand's disease
+OCHIN_EPIC,ICD-10-CM,D45,Polycythemia vera
+OCHIN_EPIC,ICD-10-CM,C22.0,Liver cell carcinoma
