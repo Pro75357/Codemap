@@ -9,7 +9,7 @@ export const CodeSystems = new Mongo.Collection('codesystems');
     { 'codesystem': 'ICD9CM',       'TTY': 'PT',        'OID': '2.16.840.1.113883.6.103' },  // using ICD9CM diagnosis version as OID code, 
     { 'codesystem': 'SNOMEDCT_US',  'TTY': 'PT',        'OID': '2.16.840.1.113883.6.96' },
     { 'codesystem': 'RXNORM',       'TTY': '',          'OID': '2.16.840.1.113883.6.88' },
-    { 'codesystem': 'LNC',          'TTY': '',          'OID': '2.16.840.1.113883.6.1' }, // Term types are : LA, (https://www.nlm.nih.gov/research/umls/sourcereleasedocs/current/LNC/stats.html)
+    { 'codesystem': 'LNC',          'TTY': 'LA',          'OID': '2.16.840.1.113883.6.1' }, // Term types are : LA, (https://www.nlm.nih.gov/research/umls/sourcereleasedocs/current/LNC/stats.html)
     { 'codesystem': 'HCPCS',        'TTY': 'PT',        'OID': '2.16.840.1.113883.6.14' },
     { 'codesystem': 'SOP',          'TTY': 'PT', 'OID': '2.16.840.1.113883.3.221.5' }  // There are only 145 codes total. Probably not very useful here. 
  ]
